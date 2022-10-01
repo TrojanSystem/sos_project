@@ -1,6 +1,7 @@
-import 'package:ada_bread/forgot_password.dart';
-import 'package:ada_bread/register_screen.dart';
-import 'package:ada_bread/slide_show.dart';
+import 'package:ada_bread/buttons/slide_show.dart';
+import 'package:ada_bread/crediential/forgot_password.dart';
+import 'package:ada_bread/crediential/register_screen.dart';
+import 'package:ada_bread/house_screen/house_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -92,23 +93,32 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(50, 10, 50, 0),
-                  width: double.infinity,
-                  height: 60.0,
-                  decoration: BoxDecoration(
-                    color: Colors.blue[500],
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => HouseScreen(),
                       ),
-                      textAlign: TextAlign.center,
+                    );
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(50, 10, 50, 0),
+                    width: double.infinity,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color: Colors.blue[500],
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Login',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 )
@@ -154,32 +164,41 @@ class LoginScreen extends StatelessWidget {
             flex: 1,
             child: Column(
               children: [
-                Container(
-                  margin: const EdgeInsets.fromLTRB(50, 10, 50, 0),
-                  width: double.infinity,
-                  height: 60.0,
-                  decoration: BoxDecoration(
-                    color: Colors.black12,
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Image.asset(
-                          'images/google.png',
-                          width: 30,
-                        ),
-                        const Text(
-                          'Login with Google',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => const HouseScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(50, 10, 50, 0),
+                    width: double.infinity,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color: Colors.black12,
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Image.asset(
+                            'images/google.png',
+                            width: 30,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
+                          const Text(
+                            'Login with Google',
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -1,8 +1,8 @@
-import 'package:ada_bread/search_button.dart';
+import 'package:ada_bread/buttons/search_button.dart';
 import 'package:flutter/material.dart';
 
-import 'house_screen/choice_of_items.dart';
-import 'house_screen/list_of_item.dart';
+import 'choice_of_items.dart';
+import 'list_of_item.dart';
 
 class HouseScreen extends StatelessWidget {
   const HouseScreen({Key key}) : super(key: key);

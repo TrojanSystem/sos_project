@@ -1,6 +1,8 @@
-import 'package:ada_bread/login_screen.dart';
-import 'package:ada_bread/slide_show.dart';
+import 'package:ada_bread/buttons/slide_show.dart';
+import 'package:ada_bread/crediential/login_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../house_screen/house_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key key}) : super(key: key);
@@ -89,23 +91,32 @@ class RegisterScreen extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(50, 10, 50, 0),
-                  width: double.infinity,
-                  height: 60.0,
-                  decoration: BoxDecoration(
-                    color: Colors.blue[500],
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Continue',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (ctx) => HouseScreen(),
                       ),
-                      textAlign: TextAlign.center,
+                    );
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.fromLTRB(50, 10, 50, 0),
+                    width: double.infinity,
+                    height: 60.0,
+                    decoration: BoxDecoration(
+                      color: Colors.blue[500],
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Continue',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ),
                 )

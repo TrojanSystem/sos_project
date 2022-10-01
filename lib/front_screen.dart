@@ -1,6 +1,7 @@
-import 'package:ada_bread/login_screen.dart';
-import 'package:ada_bread/register_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'crediential/login_screen.dart';
+import 'crediential/register_screen.dart';
 
 class FrontScreen extends StatelessWidget {
   const FrontScreen({Key key}) : super(key: key);

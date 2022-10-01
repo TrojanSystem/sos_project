@@ -1,4 +1,4 @@
-import 'package:ada_bread/slide_show.dart';
+import 'package:ada_bread/buttons/slide_show.dart';
 import 'package:flutter/material.dart';
 
 class ForgotPassword extends StatelessWidget {
@@ -29,7 +29,7 @@ class ForgotPassword extends StatelessWidget {
                         'Forgot',
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          fontSize: 30,
+                          fontSize: 35,
                         ),
                       ),
                     ),
@@ -39,7 +39,7 @@ class ForgotPassword extends StatelessWidget {
                         'Password?',
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          fontSize: 30,
+                          fontSize: 35,
                         ),
                       ),
                     ),
@@ -50,12 +50,14 @@ class ForgotPassword extends StatelessWidget {
                   child: Column(
                     children: const [
                       Text(
-                        'Dont worry! It happens.',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        'Don\'t worry! It happens.',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 17),
                       ),
                       Text(
                         'Please enter your email address.',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 17),
                       ),
                     ],
                     crossAxisAlignment: CrossAxisAlignment.start,
