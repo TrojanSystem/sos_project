@@ -1,5 +1,6 @@
-import 'package:ada_bread/front_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'car_screen/car_home_page.dart';
 
 void main() {
   runApp(const SOSProject());
@@ -12,7 +13,7 @@ class SOSProject extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FrontScreen(),
+      home: CarHomeScreen(),
     );
   }
 }

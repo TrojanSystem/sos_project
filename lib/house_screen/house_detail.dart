@@ -8,7 +8,6 @@ class HouseDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     double _w = MediaQuery.of(context).size.width;
     int columnCount = 1;
-    int columnCountForMain = 1;
     return Scaffold(
       body: Stack(
         children: [
@@ -230,7 +229,7 @@ class HouseDetail extends StatelessWidget {
                                 Expanded(
                                   flex: 2,
                                   child: Container(
-                                    padding: EdgeInsets.fromLTRB(
+                                    padding: const EdgeInsets.fromLTRB(
                                         0.0, 0.0, 0.0, 15.0),
                                     child: const Padding(
                                       padding: EdgeInsets.all(12.0),
@@ -271,10 +270,10 @@ class HouseDetail extends StatelessWidget {
           Positioned(
             bottom: 50,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: const EdgeInsets.fromLTRB(20, 10, 10, 0),
+                  margin: const EdgeInsets.fromLTRB(35, 10, 10, 0),
                   width: 80,
                   height: 60.0,
                   decoration: BoxDecoration(
