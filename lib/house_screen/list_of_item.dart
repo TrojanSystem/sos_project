@@ -47,10 +47,10 @@ class ListOfItems extends StatelessWidget {
               (int index) {
                 return AnimationConfiguration.staggeredGrid(
                   position: index,
-                  duration: Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 500),
                   columnCount: columnCount,
                   child: ScaleAnimation(
-                    duration: Duration(milliseconds: 900),
+                    duration: const Duration(milliseconds: 900),
                     curve: Curves.fastLinearToSlowEaseIn,
                     child: FadeInAnimation(
                       child: GestureDetector(

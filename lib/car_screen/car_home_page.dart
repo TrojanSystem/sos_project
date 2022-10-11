@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
+import 'car_detail.dart';
+import 'list_of_available_car.dart';
+
 class CarHomeScreen extends StatefulWidget {
   const CarHomeScreen({Key key}) : super(key: key);
 
@@ -10,12 +13,12 @@ class CarHomeScreen extends StatefulWidget {
 
 class _CarHomeScreenState extends State<CarHomeScreen> {
   bool _likedItem = false;
-  List carBrand = [
+  List<String> carBrand = [
     'tesla.png',
     'honda.png',
     'ford.png',
     'Mazda.png',
-    'mercedes.jpg',
+    'toyota.png',
     'Suzuki.png'
   ];
   @override
@@ -24,10 +27,10 @@ class _CarHomeScreenState extends State<CarHomeScreen> {
     int columnCount = 3;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey[200],
       ),
       body: Column(
         children: [
@@ -36,7 +39,7 @@ class _CarHomeScreenState extends State<CarHomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(left: 8.0, bottom: 20),
+                  padding: EdgeInsets.only(left: 8.0, bottom: 10),
                   child: Text(
                     'Let\'s Find Car as ',
                     style: TextStyle(
@@ -63,13 +66,13 @@ class _CarHomeScreenState extends State<CarHomeScreen> {
                         suffixIcon: IconButton(
                           onPressed: () {},
                           icon: const Icon(
-                            Icons.filter_alt_sharp,
+                            Icons.filter_list,
                           ),
                         ),
                         prefixIcon: const Icon(Icons.search_outlined),
                         hintText: 'Search a car...'),
                   ),
-                  margin: const EdgeInsets.fromLTRB(30, 30, 30, 8),
+                  margin: const EdgeInsets.fromLTRB(30, 18, 30, 8),
                 ),
               ],
             ),
@@ -95,14 +98,16 @@ class _CarHomeScreenState extends State<CarHomeScreen> {
                         flex: 2,
                         child: ListView.builder(
                           itemBuilder: (context, index) => Container(
+                            width: 80,
                             margin: const EdgeInsets.all(8),
                             child: Material(
+                              shadowColor: Colors.grey[200],
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(15),
                               elevation: 50,
                               child: Image.asset(
-                                '${carBrand[index]}',
-                                fit: BoxFit.cover,
+                                'images/${carBrand[index]}',
+                                fit: BoxFit.contain,
                               ),
                             ),
                           ),
@@ -112,6 +117,7 @@ class _CarHomeScreenState extends State<CarHomeScreen> {
                       ),
                       Expanded(
                         child: Container(
+                          color: Colors.transparent,
                           margin: const EdgeInsets.symmetric(horizontal: 20),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,7 +136,14 @@ class _CarHomeScreenState extends State<CarHomeScreen> {
                                   borderRadius: BorderRadius.circular(10),
                                   side: BorderSide(color: Colors.blue[800]),
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (ctx) =>
+                                          const ListOfAvailableCars(),
+                                    ),
+                                  );
+                                },
                                 child: const Text('More'),
                               ),
                             ],
@@ -174,103 +187,121 @@ class _CarHomeScreenState extends State<CarHomeScreen> {
                                   ),
                                 ],
                               ),
-                              child: Container(
-                                height: _w * 0.35,
-                                color: Colors.white,
-                                margin: const EdgeInsets.all(8),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Image.asset(
-                                        'images/ford.jpg',
-                                        fit: BoxFit.fill,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (ctx) => CarDetail(),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  height: _w * 0.35,
+                                  color: Colors.white,
+                                  margin: const EdgeInsets.all(8),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Image.asset(
+                                          'images/ford.jpg',
+                                          fit: BoxFit.fill,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const Text(
-                                            'Ford Latest',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 20),
-                                          ),
-                                          Row(
-                                            children: const [
-                                              Icon(Icons.location_on_outlined),
-                                              Text(
-                                                'Dukem, Ethiopia',
-                                                style: TextStyle(fontSize: 15),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: const [
-                                              Icon(
-                                                Icons.star_rate_rounded,
-                                                color: Colors.amber,
-                                              ),
-                                              Text(
-                                                '4.5 ',
-                                                style: TextStyle(fontSize: 18),
-                                              ),
-                                              Text(
-                                                ' (485 Reviews)',
-                                                style: TextStyle(fontSize: 18),
-                                              )
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              MaterialButton(
-                                                color: Colors.blue[800],
-                                                elevation: 20,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  side: BorderSide(
-                                                      color: Colors.blue[800]),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Text(
+                                              'Ford Latest',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w900,
+                                                  fontSize: 20),
+                                            ),
+                                            Row(
+                                              children: const [
+                                                Icon(
+                                                    Icons.location_on_outlined),
+                                                Text(
+                                                  'Dukem, Ethiopia',
+                                                  style:
+                                                      TextStyle(fontSize: 15),
                                                 ),
-                                                onPressed: () {},
-                                                child: const Text('Bid'),
-                                              ),
-                                              MaterialButton(
-                                                shape: const CircleBorder(),
-                                                elevation: 15,
-                                                color: Colors.white,
-                                                child: Padding(
-                                                  padding: const EdgeInsets.all(
-                                                      15.0),
-                                                  child: Icon(
-                                                    _likedItem
-                                                        ? Icons.favorite
-                                                        : Icons.favorite_border,
-                                                    color: Colors.pink[800],
+                                              ],
+                                            ),
+                                            Row(
+                                              children: const [
+                                                Icon(
+                                                  Icons.star_rate_rounded,
+                                                  color: Colors.amber,
+                                                ),
+                                                Text(
+                                                  '4.5 ',
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                                Text(
+                                                  ' (485 Reviews)',
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                MaterialButton(
+                                                  color: Colors.blue[800],
+                                                  elevation: 20,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    side: BorderSide(
+                                                        color:
+                                                            Colors.blue[800]),
                                                   ),
+                                                  onPressed: () {},
+                                                  child: const Text('Bid'),
                                                 ),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    _likedItem = !_likedItem;
-                                                  });
-                                                },
-                                              ),
-                                            ],
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                          )
-                                        ],
+                                                MaterialButton(
+                                                  shape: const CircleBorder(),
+                                                  elevation: 15,
+                                                  color: Colors.white,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            15.0),
+                                                    child: Icon(
+                                                      _likedItem
+                                                          ? Icons.favorite
+                                                          : Icons
+                                                              .favorite_border,
+                                                      color: Colors.pink[800],
+                                                    ),
+                                                  ),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _likedItem = !_likedItem;
+                                                    });
+                                                  },
+                                                ),
+                                              ],
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
