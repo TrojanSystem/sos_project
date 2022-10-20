@@ -1,0 +1,316 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:provider/provider.dart';
+
+import '../data_storage.dart';
+
+class NewsDetail extends StatefulWidget {
+  final String images;
+  final String title;
+  final String description;
+  final String content;
+
+  NewsDetail({this.title, this.description, this.images, this.content});
+
+  @override
+  State<NewsDetail> createState() => _NewsDetailState();
+}
+
+class _NewsDetailState extends State<NewsDetail> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double _w = MediaQuery.of(context).size.width;
+
+    int columnCount = 1;
+
+    return Scaffold(
+      body: Consumer<DataStorage>(
+        builder: (context, provider, child) {
+          String dropdownvalue = Provider.of<DataStorage>(context).dropValue;
+          return Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      const Color.fromRGBO(40, 53, 147, 1),
+                      const Color.fromRGBO(40, 53, 147, 1).withOpacity(0.9)
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      blurRadius: 4,
+                      offset: const Offset(4, 8), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: AnimationLimiter(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: AnimationConfiguration.staggeredGrid(
+                          position: 0,
+                          duration: const Duration(milliseconds: 500),
+                          columnCount: columnCount,
+                          child: ScaleAnimation(
+                            duration: const Duration(milliseconds: 900),
+                            curve: Curves.fastLinearToSlowEaseIn,
+                            child: FadeInAnimation(
+                              child: Container(
+                                clipBehavior: Clip.antiAlias,
+                                child: Image.network(
+                                  widget.images,
+                                  fit: BoxFit.contain,
+                                ),
+                                margin: EdgeInsets.only(
+                                    bottom: _w / 30,
+                                    left: _w / 60,
+                                    right: _w / 60),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 40,
+                                      spreadRadius: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: AnimationConfiguration.staggeredGrid(
+                          position: 0,
+                          duration: const Duration(milliseconds: 500),
+                          columnCount: columnCount,
+                          child: ScaleAnimation(
+                            duration: const Duration(milliseconds: 900),
+                            curve: Curves.fastLinearToSlowEaseIn,
+                            child: FadeInAnimation(
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                18.0, 15, 0, 15),
+                                            child: Text(
+                                              widget.title.toString(),
+                                              style: const TextStyle(
+                                                decoration: TextDecoration.none,
+                                                fontSize: 18,
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w900,
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            '${widget.description}',
+                                            style: const TextStyle(
+                                              decoration: TextDecoration.none,
+                                              fontSize: 20,
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.w900,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    // Expanded(
+                                    //   flex: 1,
+                                    //   child: Row(
+                                    //     children: [
+                                    //       Container(
+                                    //         width: 350,
+                                    //         padding: const EdgeInsets.fromLTRB(
+                                    //             17, 0, 8, 8),
+                                    //         child: ListView(
+                                    //           scrollDirection: Axis.horizontal,
+                                    //           children: [
+                                    //             Row(
+                                    //               children: [
+                                    //                 Image.asset(
+                                    //                   'images/double-bed.png',
+                                    //                   width: 25,
+                                    //                 ),
+                                    //                 Container(
+                                    //                   padding:
+                                    //                       const EdgeInsets.all(
+                                    //                           8),
+                                    //                   child: const Text(
+                                    //                     '3 beds',
+                                    //                     style: TextStyle(
+                                    //                       decoration:
+                                    //                           TextDecoration
+                                    //                               .none,
+                                    //                       fontSize: 20,
+                                    //                       color: Colors.grey,
+                                    //                       fontWeight:
+                                    //                           FontWeight.w900,
+                                    //                     ),
+                                    //                   ),
+                                    //                 ),
+                                    //               ],
+                                    //             ),
+                                    //             Row(
+                                    //               children: [
+                                    //                 Image.asset(
+                                    //                   'images/bath.png',
+                                    //                   width: 25,
+                                    //                 ),
+                                    //                 Container(
+                                    //                   padding:
+                                    //                       const EdgeInsets.all(
+                                    //                           8),
+                                    //                   child: const Text(
+                                    //                     '2 bath',
+                                    //                     style: TextStyle(
+                                    //                       decoration:
+                                    //                           TextDecoration
+                                    //                               .none,
+                                    //                       fontSize: 20,
+                                    //                       color: Colors.grey,
+                                    //                       fontWeight:
+                                    //                           FontWeight.w900,
+                                    //                     ),
+                                    //                   ),
+                                    //                 ),
+                                    //               ],
+                                    //             ),
+                                    //             Row(
+                                    //               children: [
+                                    //                 Image.asset(
+                                    //                   'images/parking-sign.png',
+                                    //                   width: 25,
+                                    //                 ),
+                                    //                 Container(
+                                    //                   padding:
+                                    //                       const EdgeInsets.all(
+                                    //                           8),
+                                    //                   child: const Text(
+                                    //                     '1 parking',
+                                    //                     style: TextStyle(
+                                    //                       decoration:
+                                    //                           TextDecoration
+                                    //                               .none,
+                                    //                       fontSize: 20,
+                                    //                       color: Colors.grey,
+                                    //                       fontWeight:
+                                    //                           FontWeight.w900,
+                                    //                     ),
+                                    //                   ),
+                                    //                 ),
+                                    //               ],
+                                    //             ),
+                                    //             Row(
+                                    //               children: [
+                                    //                 Image.asset(
+                                    //                   'images/area.png',
+                                    //                   width: 25,
+                                    //                 ),
+                                    //                 Container(
+                                    //                   padding:
+                                    //                       const EdgeInsets.all(
+                                    //                           8),
+                                    //                   child: const Text(
+                                    //                     '140 m\u00B2',
+                                    //                     style: TextStyle(
+                                    //                       decoration:
+                                    //                           TextDecoration
+                                    //                               .none,
+                                    //                       fontSize: 20,
+                                    //                       color: Colors.grey,
+                                    //                       fontWeight:
+                                    //                           FontWeight.w900,
+                                    //                     ),
+                                    //                   ),
+                                    //                 ),
+                                    //               ],
+                                    //             ),
+                                    //           ],
+                                    //         ),
+                                    //       )
+                                    //     ],
+                                    //   ),
+                                    // ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Container(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0.0, 0.0, 0.0, 15.0),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(12.0),
+                                          child: Text(
+                                            ' ${widget.content}',
+                                            softWrap: true,
+                                            textAlign: TextAlign.justify,
+                                            maxLines: 3,
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                margin: EdgeInsets.only(
+                                    bottom: _w / 60,
+                                    left: _w / 60,
+                                    right: _w / 60),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(20)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.1),
+                                      blurRadius: 40,
+                                      spreadRadius: 10,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios_sharp,
+                    color: Colors.black,
+                    size: 35,
+                  ),
+                ),
+              )
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
