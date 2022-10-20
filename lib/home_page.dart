@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'drawer/custom_drawer.dart';
+import 'news_screen/news_screen.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
@@ -20,6 +21,7 @@ class HomePage extends StatelessWidget {
           elevation: 0,
           toolbarHeight: 35,
           bottom: TabBar(
+            padding: const EdgeInsets.only(bottom: 5),
             indicatorColor: Colors.black,
             indicatorWeight: 3,
             tabs: [
@@ -57,18 +59,10 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              color: Colors.grey[200],
-              child: const Center(
-                child: Text(
-                  'News Screen',
-                  style: TextStyle(fontSize: 50),
-                ),
-              ),
-            ),
+            NewsScreen(),
           ],
         ),
-        drawer: CustomDrawer(),
+        drawer: const CustomDrawer(),
       ),
     );
   }

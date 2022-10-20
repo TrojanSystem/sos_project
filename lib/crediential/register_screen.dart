@@ -1,8 +1,7 @@
 import 'package:ada_bread/buttons/slide_show.dart';
 import 'package:ada_bread/crediential/login_screen.dart';
+import 'package:ada_bread/home_page.dart';
 import 'package:flutter/material.dart';
-
-import '../house_screen/house_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key key}) : super(key: key);
@@ -95,7 +94,7 @@ class RegisterScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (ctx) => HouseScreen(),
+                        builder: (ctx) => const HomePage(),
                       ),
                     );
                   },

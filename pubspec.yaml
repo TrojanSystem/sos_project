@@ -56,6 +56,7 @@ dependencies:
   slimy_card: ^1.0.4
   fab_circular_menu: ^1.0.2
   flutter_staggered_animations: "^1.0.0"
+  fancy_shimmer_image: ^2.0.2
 
 dev_dependencies:
   flutter_test:

@@ -22,14 +22,19 @@ class HouseScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          ChoiceOfItems(columnCount: columnCount, w: _w),
-          ListOfItems(
-              w: _w,
-              columnCountForMain: columnCountForMain,
-              columnCount: columnCount),
-        ],
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.75,
+          child: Column(
+            children: [
+              ChoiceOfItems(columnCount: columnCount, w: _w),
+              ListOfItems(
+                  w: _w,
+                  columnCountForMain: columnCountForMain,
+                  columnCount: columnCount),
+            ],
+          ),
+        ),
       ),
     );
   }

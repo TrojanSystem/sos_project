@@ -37,6 +37,12 @@ class SearchButton extends StatelessWidget {
                 Icons.search_outlined,
                 size: 35,
               ),
+              suffixIcon: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.filter_list,
+                ),
+              ),
               hintText: 'Search your dream house?',
               filled: true,
               fillColor: Colors.grey[200],

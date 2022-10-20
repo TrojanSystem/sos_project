@@ -486,7 +486,7 @@ class _CarDetailState extends State<CarDetail> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios_sharp,
                 color: Colors.white,
                 size: 35,

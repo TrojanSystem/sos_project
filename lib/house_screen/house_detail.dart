@@ -518,6 +518,18 @@ class _HouseDetailState extends State<HouseDetail> {
                     });
                   },
                 ),
+              ),
+              Positioned(
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back_ios_sharp,
+                    color: Colors.black,
+                    size: 35,
+                  ),
+                ),
               )
             ],
           );
@@ -528,47 +540,48 @@ class _HouseDetailState extends State<HouseDetail> {
 
   void whichBank(BuildContext context, double _w) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Which Bank'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: items
-                  .map(
-                    (e) => Padding(
-                      padding: const EdgeInsets.fromLTRB(15.0, 8, 8, 8),
-                      child: Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _isSelected = !_isSelected;
-                              });
-                            },
-                            icon: const Icon(
-                              Icons.check_circle,
-                              color: Colors.green,
-                            ),
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Which Bank'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: items
+                .map(
+                  (e) => Padding(
+                    padding: const EdgeInsets.fromLTRB(15.0, 8, 8, 8),
+                    child: Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _isSelected = !_isSelected;
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.check_circle,
+                            color: Colors.green,
                           ),
-                          SizedBox(
-                            width: _w * 0.01,
-                          ),
-                          Text(e)
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          width: _w * 0.01,
+                        ),
+                        Text(e)
+                      ],
                     ),
-                  )
-                  .toList(),
-            ),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('Ok'))
-            ],
-          );
-        });
+                  ),
+                )
+                .toList(),
+          ),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Ok'))
+          ],
+        );
+      },
+    );
   }
 }
