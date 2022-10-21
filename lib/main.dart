@@ -1,8 +1,7 @@
 import 'package:ada_bread/data_storage.dart';
+import 'package:ada_bread/front_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'news_screen/news_screen.dart';
 
 void main() {
   runApp(const SOSProject());
@@ -19,9 +18,9 @@ class SOSProject extends StatelessWidget {
           create: (ctx) => DataStorage(),
         ),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: NewsScreen(),
+        home: FrontScreen(),
       ),
     );
   }

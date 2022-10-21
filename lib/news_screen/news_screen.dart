@@ -42,20 +42,6 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     double _w = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 70,
-        title: const Text(
-          'News Feeds',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 25,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
       body: _isLoading
           ? const Center(
               child: CircularProgressIndicator(),
