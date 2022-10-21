@@ -31,9 +31,11 @@ class _NewsDetailState extends State<NewsDetail> {
     return Scaffold(
       body: Consumer<DataStorage>(
         builder: (context, provider, child) {
-          String dropdownvalue = Provider.of<DataStorage>(context).dropValue;
           return Stack(
             children: [
+              const SizedBox(
+                height: 10,
+              ),
               Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -64,11 +66,11 @@ class _NewsDetailState extends State<NewsDetail> {
                             curve: Curves.fastLinearToSlowEaseIn,
                             child: FadeInAnimation(
                               child: Container(
-                                clipBehavior: Clip.antiAlias,
                                 child: Image.network(
                                   widget.images,
                                   fit: BoxFit.contain,
                                 ),
+                                clipBehavior: Clip.antiAlias,
                                 margin: EdgeInsets.only(
                                     bottom: _w / 30,
                                     left: _w / 60,
@@ -122,13 +124,17 @@ class _NewsDetailState extends State<NewsDetail> {
                                               ),
                                             ),
                                           ),
-                                          Text(
-                                            '${widget.description}',
-                                            style: const TextStyle(
-                                              decoration: TextDecoration.none,
-                                              fontSize: 20,
-                                              color: Colors.grey,
-                                              fontWeight: FontWeight.w900,
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: Text(
+                                              widget.description,
+                                              style: const TextStyle(
+                                                decoration: TextDecoration.none,
+                                                fontSize: 20,
+                                                color: Colors.grey,
+                                                fontWeight: FontWeight.w900,
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -257,13 +263,14 @@ class _NewsDetailState extends State<NewsDetail> {
                                         padding: const EdgeInsets.fromLTRB(
                                             0.0, 0.0, 0.0, 15.0),
                                         child: Padding(
-                                          padding: EdgeInsets.all(12.0),
+                                          padding: const EdgeInsets.all(12.0),
                                           child: Text(
                                             ' ${widget.content}',
                                             softWrap: true,
                                             textAlign: TextAlign.justify,
                                             maxLines: 3,
-                                            style: TextStyle(fontSize: 15),
+                                            style:
+                                                const TextStyle(fontSize: 15),
                                           ),
                                         ),
                                       ),

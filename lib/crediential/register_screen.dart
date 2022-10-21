@@ -2,6 +2,8 @@ import 'package:ada_bread/buttons/slide_show.dart';
 import 'package:ada_bread/crediential/login_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../home_page.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key key}) : super(key: key);
 
@@ -182,11 +184,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           try {
                             if (formKey.currentState.validate()) {
                               formKey.currentState.save();
-                              //   Navigator.of(context).push(
-                              //     MaterialPageRoute(
-                              //       builder: (ctx) => const HomePage(),
-                              //     ),
-                              //   );
+                              _userNameRegisterControl.clear();
+                              _passwordRegisterControl.clear();
+                              _emailRegisterControl.clear();
+                              Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                  builder: (ctx) => HomePage(),
+                                ),
+                              );
                             }
                           } catch (e) {}
                         },

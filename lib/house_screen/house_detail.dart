@@ -1,3 +1,4 @@
+import 'package:ada_bread/collection_methods.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
@@ -332,115 +333,7 @@ class _HouseDetailState extends State<HouseDetail> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        setState(() {
-                          showDialog(
-                            context: context,
-                            builder: (ctx) {
-                              return AlertDialog(
-                                actions: [
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Container(
-                                      margin: const EdgeInsets.all(8),
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            const Color.fromRGBO(
-                                                40, 53, 147, 1),
-                                            const Color.fromRGBO(40, 53, 147, 1)
-                                                .withOpacity(0.9)
-                                          ],
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                            blurRadius: 4,
-                                            offset: const Offset(4,
-                                                8), // changes position of shadow
-                                          ),
-                                        ],
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      padding: const EdgeInsets.fromLTRB(
-                                          16.0, 8, 8, 8),
-                                      child: Row(
-                                        children: [
-                                          Image.asset(
-                                            'images/cash-bag.png',
-                                            width: 40,
-                                            color: Colors.white,
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          const Text(
-                                            'CASH',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 25),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    borderRadius: BorderRadius.circular(15),
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      whichBank(context, _w);
-                                    },
-                                    child: Container(
-                                      margin: const EdgeInsets.all(8),
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          colors: [
-                                            const Color.fromRGBO(
-                                                40, 53, 147, 1),
-                                            const Color.fromRGBO(40, 53, 147, 1)
-                                                .withOpacity(0.9)
-                                          ],
-                                        ),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color:
-                                                Colors.black.withOpacity(0.5),
-                                            blurRadius: 4,
-                                            offset: const Offset(4,
-                                                8), // changes position of shadow
-                                          ),
-                                        ],
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      padding: const EdgeInsets.fromLTRB(
-                                          16.0, 8, 8, 8),
-                                      child: Row(
-                                        children: [
-                                          Image.asset(
-                                            'images/loan.png',
-                                            width: 40,
-                                          ),
-                                          const SizedBox(
-                                            width: 10,
-                                          ),
-                                          const Text(
-                                            'LOAN',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 25),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                                title: const Text('Buying Process'),
-                                alignment: Alignment.center,
-                              );
-                            },
-                          );
-                        });
+                        buyingProcess(context);
                       },
                       child: Container(
                         margin: const EdgeInsets.fromLTRB(35, 10, 10, 0),

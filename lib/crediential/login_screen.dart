@@ -173,11 +173,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 try {
                                   if (formLoginKey.currentState.validate()) {
                                     formLoginKey.currentState.save();
-                                    // Navigator.of(context).push(
-                                    //   MaterialPageRoute(
-                                    //     builder: (ctx) => const HomePage(),
-                                    //   ),
-                                    // );
+                                    _passwordControl.clear();
+                                    _emailControl.clear();
+                                    Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                        builder: (ctx) => const HomePage(),
+                                      ),
+                                    );
                                   }
                                 } catch (e) {}
                               },

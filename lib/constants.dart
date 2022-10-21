@@ -15,6 +15,7 @@ const kkSummaryIncome = TextStyle(
   fontWeight: FontWeight.w900,
   fontSize: 18,
 );
+
 const kkSummaryExpense = TextStyle(
   color: Colors.red,
   fontWeight: FontWeight.w900,

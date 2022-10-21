@@ -46,84 +46,97 @@ class _NewsScreenState extends State<NewsScreen> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : AnimationLimiter(
-              child: GridView.count(
-                physics: const AlwaysScrollableScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
-                padding:
-                    EdgeInsets.fromLTRB(_w / 60, _w / 30, _w / 60, _w / 60),
-                crossAxisCount: columnCount,
-                children: List.generate(
-                  recips.length,
-                  (int index) {
-                    return AnimationConfiguration.staggeredGrid(
-                      position: index,
-                      duration: const Duration(milliseconds: 500),
-                      columnCount: columnCount,
-                      child: ScaleAnimation(
-                        duration: const Duration(milliseconds: 900),
-                        curve: Curves.fastLinearToSlowEaseIn,
-                        child: FadeInAnimation(
-                          child: Container(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: GridTile(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                      builder: (ctx) => NewsDetail(
-                                        title: recips[index].title,
-                                        description: recips[index].description,
-                                        images: recips[index].urlToImage,
-                                        content: recips[index].content,
-                                      ),
-                                    ));
-                                  },
-                                  child: FancyShimmerImage(
-                                    boxFit: BoxFit.contain,
-                                    imageUrl: recips[index].urlToImage,
-                                    errorWidget: Image.network(
-                                        'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
-                                    shimmerBaseColor: Colors.greenAccent,
-                                    shimmerHighlightColor: Colors.grey,
-                                    shimmerBackColor: Colors.greenAccent,
-                                  ),
-                                ),
-                                footer: GridTileBar(
-                                  backgroundColor: Colors.transparent,
-                                  title: Text(
-                                    recips[index].title,
-                                    style: const TextStyle(
-                                      overflow: TextOverflow.ellipsis,
-                                      fontSize: 15,
-                                      color: Colors.black54,
-                                      fontWeight: FontWeight.w900,
+          : Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    const Color.fromRGBO(40, 53, 147, 1),
+                    const Color.fromRGBO(40, 53, 147, 1).withOpacity(0.9)
+                  ],
+                ),
+              ),
+              child: AnimationLimiter(
+                child: GridView.count(
+                  physics: const AlwaysScrollableScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
+                  padding:
+                      EdgeInsets.fromLTRB(_w / 60, _w / 30, _w / 60, _w / 60),
+                  crossAxisCount: columnCount,
+                  children: List.generate(
+                    recips.length,
+                    (int index) {
+                      return AnimationConfiguration.staggeredGrid(
+                        position: index,
+                        duration: const Duration(milliseconds: 500),
+                        columnCount: columnCount,
+                        child: ScaleAnimation(
+                          duration: const Duration(milliseconds: 900),
+                          curve: Curves.fastLinearToSlowEaseIn,
+                          child: FadeInAnimation(
+                            child: Container(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: GridTile(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (ctx) => NewsDetail(
+                                          title: recips[index].title,
+                                          description:
+                                              recips[index].description,
+                                          images: recips[index].urlToImage,
+                                          content: recips[index].content,
+                                        ),
+                                      ));
+                                    },
+                                    child: FancyShimmerImage(
+                                      boxFit: BoxFit.contain,
+                                      imageUrl: recips[index].urlToImage,
+                                      errorWidget: Image.network(
+                                          'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
+                                      shimmerBaseColor: Colors.greenAccent,
+                                      shimmerHighlightColor: Colors.grey,
+                                      shimmerBackColor: Colors.greenAccent,
                                     ),
-                                    textAlign: TextAlign.center,
+                                  ),
+                                  footer: GridTileBar(
+                                    backgroundColor: Colors.transparent,
+                                    title: Text(
+                                      recips[index].title,
+                                      style: const TextStyle(
+                                        overflow: TextOverflow.ellipsis,
+                                        fontSize: 15,
+                                        color: Colors.black54,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            margin: EdgeInsets.only(
-                                bottom: _w / 30, left: _w / 30, right: _w / 30),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(20)),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.1),
-                                  blurRadius: 40,
-                                  spreadRadius: 10,
-                                ),
-                              ],
+                              margin: EdgeInsets.only(
+                                  bottom: _w / 30,
+                                  left: _w / 30,
+                                  right: _w / 30),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(20)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 40,
+                                    spreadRadius: 10,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
             ),

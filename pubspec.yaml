@@ -57,6 +57,8 @@ dependencies:
   fab_circular_menu: ^1.0.2
   flutter_staggered_animations: "^1.0.0"
   fancy_shimmer_image: ^2.0.2
+  syncfusion_flutter_sliders:
+  material_design_icons_flutter: 5.0.6996
 
 dev_dependencies:
   flutter_test:

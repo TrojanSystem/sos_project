@@ -25,21 +25,33 @@ class HomePage extends StatelessWidget {
             indicatorColor: Colors.black,
             indicatorWeight: 3,
             tabs: [
-              Image.asset(
-                'images/home (1).png',
-                width: 30,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Image.asset(
+                  'images/home (1).png',
+                  width: 25,
+                ),
               ),
-              Image.asset(
-                'images/steering-wheel.png',
-                width: 30,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Image.asset(
+                  'images/steering-wheel.png',
+                  width: 25,
+                ),
               ),
-              Image.asset(
-                'images/auction.png',
-                width: 30,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Image.asset(
+                  'images/auction.png',
+                  width: 25,
+                ),
               ),
-              Image.asset(
-                'images/news.png',
-                width: 30,
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Image.asset(
+                  'images/news.png',
+                  width: 25,
+                ),
               ),
             ],
           ),
