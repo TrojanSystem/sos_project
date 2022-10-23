@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'front_screen.dart';
+import 'house_screen/house_model.dart';
 
 void main() {
   runApp(const SOSProject());
@@ -17,6 +18,9 @@ class SOSProject extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => DataStorage(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => HouseData(),
         ),
       ],
       child: const MaterialApp(

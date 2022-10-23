@@ -42,7 +42,7 @@ Future<dynamic> buyingProcess(BuildContext context) {
                 children: [
                   Image.asset(
                     'images/cash-bag.png',
-                    width: 40,
+                    width: 33,
                     color: Colors.white,
                   ),
                   const SizedBox(
@@ -53,7 +53,7 @@ Future<dynamic> buyingProcess(BuildContext context) {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w900,
-                        fontSize: 25),
+                        fontSize: 20),
                   )
                 ],
               ),
@@ -81,7 +81,7 @@ Future<dynamic> buyingProcess(BuildContext context) {
                 children: [
                   Image.asset(
                     'images/loan.png',
-                    width: 40,
+                    width: 33,
                   ),
                   const SizedBox(
                     width: 10,
@@ -91,15 +91,15 @@ Future<dynamic> buyingProcess(BuildContext context) {
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w900,
-                        fontSize: 25),
+                        fontSize: 20),
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.10,
+                    width: MediaQuery.of(context).size.width * 0.04,
                   ),
                   DropdownButton(
                     // Initial Value
                     value: dropdownvalue,
-                    style: const TextStyle(color: Colors.white, fontSize: 18),
+                    style: const TextStyle(color: Colors.white, fontSize: 15),
                     // Down Arrow Icon
                     icon: const Icon(
                       Icons.keyboard_arrow_down,

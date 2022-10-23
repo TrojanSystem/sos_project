@@ -114,8 +114,8 @@ class _CarDetailState extends State<CarDetail> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       const Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            18.0, 15, 0, 15),
+                                        padding:
+                                            EdgeInsets.fromLTRB(18.0, 8, 0, 15),
                                         child: Text(
                                           'Isuzu 2001 Model',
                                           style: TextStyle(
@@ -151,9 +151,11 @@ class _CarDetailState extends State<CarDetail> {
                                   child: Row(
                                     children: [
                                       Container(
-                                        width: 350,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.93,
                                         padding: const EdgeInsets.fromLTRB(
-                                            17, 0, 8, 8),
+                                            8, 0, 8, 0),
                                         child: ListView(
                                           scrollDirection: Axis.horizontal,
                                           children: [
@@ -298,6 +300,7 @@ class _CarDetailState extends State<CarDetail> {
           ),
           Positioned(
             bottom: 50,
+            right: 10,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

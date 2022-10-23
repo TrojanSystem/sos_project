@@ -8,7 +8,7 @@ class LoanBank extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('$loanBank'),
+        title: Text(loanBank),
       ),
     );
   }

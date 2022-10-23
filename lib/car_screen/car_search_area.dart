@@ -54,6 +54,7 @@ class CarSearchArea extends StatelessWidget {
                 flex: 5,
                 child: Container(
                   child: TextFormField(
+                    textInputAction: TextInputAction.go,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(
                         Icons.search_outlined,

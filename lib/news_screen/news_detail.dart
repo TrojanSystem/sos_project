@@ -29,6 +29,10 @@ class _NewsDetailState extends State<NewsDetail> {
     int columnCount = 1;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(40, 53, 147, 1),
+        elevation: 0,
+      ),
       body: Consumer<DataStorage>(
         builder: (context, provider, child) {
           return Stack(
@@ -38,12 +42,7 @@ class _NewsDetailState extends State<NewsDetail> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color.fromRGBO(40, 53, 147, 1),
-                      const Color.fromRGBO(40, 53, 147, 1).withOpacity(0.9)
-                    ],
-                  ),
+                  color: const Color.fromRGBO(40, 53, 147, 1),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.5),
@@ -93,7 +92,7 @@ class _NewsDetailState extends State<NewsDetail> {
                         ),
                       ),
                       Expanded(
-                        flex: 1,
+                        flex: 2,
                         child: AnimationConfiguration.staggeredGrid(
                           position: 0,
                           duration: const Duration(milliseconds: 500),
@@ -141,140 +140,23 @@ class _NewsDetailState extends State<NewsDetail> {
                                       ),
                                     ),
                                     // Expanded(
-                                    //   flex: 1,
-                                    //   child: Row(
-                                    //     children: [
-                                    //       Container(
-                                    //         width: 350,
-                                    //         padding: const EdgeInsets.fromLTRB(
-                                    //             17, 0, 8, 8),
-                                    //         child: ListView(
-                                    //           scrollDirection: Axis.horizontal,
-                                    //           children: [
-                                    //             Row(
-                                    //               children: [
-                                    //                 Image.asset(
-                                    //                   'images/double-bed.png',
-                                    //                   width: 25,
-                                    //                 ),
-                                    //                 Container(
-                                    //                   padding:
-                                    //                       const EdgeInsets.all(
-                                    //                           8),
-                                    //                   child: const Text(
-                                    //                     '3 beds',
-                                    //                     style: TextStyle(
-                                    //                       decoration:
-                                    //                           TextDecoration
-                                    //                               .none,
-                                    //                       fontSize: 20,
-                                    //                       color: Colors.grey,
-                                    //                       fontWeight:
-                                    //                           FontWeight.w900,
-                                    //                     ),
-                                    //                   ),
-                                    //                 ),
-                                    //               ],
-                                    //             ),
-                                    //             Row(
-                                    //               children: [
-                                    //                 Image.asset(
-                                    //                   'images/bath.png',
-                                    //                   width: 25,
-                                    //                 ),
-                                    //                 Container(
-                                    //                   padding:
-                                    //                       const EdgeInsets.all(
-                                    //                           8),
-                                    //                   child: const Text(
-                                    //                     '2 bath',
-                                    //                     style: TextStyle(
-                                    //                       decoration:
-                                    //                           TextDecoration
-                                    //                               .none,
-                                    //                       fontSize: 20,
-                                    //                       color: Colors.grey,
-                                    //                       fontWeight:
-                                    //                           FontWeight.w900,
-                                    //                     ),
-                                    //                   ),
-                                    //                 ),
-                                    //               ],
-                                    //             ),
-                                    //             Row(
-                                    //               children: [
-                                    //                 Image.asset(
-                                    //                   'images/parking-sign.png',
-                                    //                   width: 25,
-                                    //                 ),
-                                    //                 Container(
-                                    //                   padding:
-                                    //                       const EdgeInsets.all(
-                                    //                           8),
-                                    //                   child: const Text(
-                                    //                     '1 parking',
-                                    //                     style: TextStyle(
-                                    //                       decoration:
-                                    //                           TextDecoration
-                                    //                               .none,
-                                    //                       fontSize: 20,
-                                    //                       color: Colors.grey,
-                                    //                       fontWeight:
-                                    //                           FontWeight.w900,
-                                    //                     ),
-                                    //                   ),
-                                    //                 ),
-                                    //               ],
-                                    //             ),
-                                    //             Row(
-                                    //               children: [
-                                    //                 Image.asset(
-                                    //                   'images/area.png',
-                                    //                   width: 25,
-                                    //                 ),
-                                    //                 Container(
-                                    //                   padding:
-                                    //                       const EdgeInsets.all(
-                                    //                           8),
-                                    //                   child: const Text(
-                                    //                     '140 m\u00B2',
-                                    //                     style: TextStyle(
-                                    //                       decoration:
-                                    //                           TextDecoration
-                                    //                               .none,
-                                    //                       fontSize: 20,
-                                    //                       color: Colors.grey,
-                                    //                       fontWeight:
-                                    //                           FontWeight.w900,
-                                    //                     ),
-                                    //                   ),
-                                    //                 ),
-                                    //               ],
-                                    //             ),
-                                    //           ],
-                                    //         ),
-                                    //       )
-                                    //     ],
+                                    //   flex: 2,
+                                    //   child: Container(
+                                    //     padding: const EdgeInsets.fromLTRB(
+                                    //         0.0, 0.0, 0.0, 15.0),
+                                    //     child: Padding(
+                                    //       padding: const EdgeInsets.all(12.0),
+                                    //       child: Text(
+                                    //         ' ${widget.content}',
+                                    //         softWrap: true,
+                                    //         textAlign: TextAlign.justify,
+                                    //         maxLines: 3,
+                                    //         style:
+                                    //             const TextStyle(fontSize: 15),
+                                    //       ),
+                                    //     ),
                                     //   ),
-                                    // ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Container(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            0.0, 0.0, 0.0, 15.0),
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(12.0),
-                                          child: Text(
-                                            ' ${widget.content}',
-                                            softWrap: true,
-                                            textAlign: TextAlign.justify,
-                                            maxLines: 3,
-                                            style:
-                                                const TextStyle(fontSize: 15),
-                                          ),
-                                        ),
-                                      ),
-                                    )
+                                    // )
                                   ],
                                 ),
                                 margin: EdgeInsets.only(
@@ -302,18 +184,18 @@ class _NewsDetailState extends State<NewsDetail> {
                   ),
                 ),
               ),
-              Positioned(
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back_ios_sharp,
-                    color: Colors.black,
-                    size: 35,
-                  ),
-                ),
-              )
+              // Positioned(
+              //   child: IconButton(
+              //     onPressed: () {
+              //       Navigator.of(context).pop();
+              //     },
+              //     icon: const Icon(
+              //       Icons.arrow_back_ios_sharp,
+              //       color: Colors.black,
+              //       size: 35,
+              //     ),
+              //   ),
+              // )
             ],
           );
         },

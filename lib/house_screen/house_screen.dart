@@ -16,7 +16,7 @@ class HouseScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         toolbarHeight: 110,
-        actions: const [
+        actions: [
           SearchButton(),
         ],
         backgroundColor: Colors.white,
