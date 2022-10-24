@@ -1,7 +1,7 @@
+import 'package:ada_bread/crediential/login.dart';
 import 'package:flutter/material.dart';
 
-import 'crediential/login_screen.dart';
-import 'crediential/register_screen.dart';
+import 'crediential/registration.dart';
 
 class FrontScreen extends StatelessWidget {
   const FrontScreen({Key key}) : super(key: key);
@@ -68,7 +68,7 @@ class FrontScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (ctx) => RegisterScreen(),
+                      builder: (ctx) => SignUp(),
                     ));
                   },
                   child: Container(
@@ -107,7 +107,7 @@ class FrontScreen extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (ctx) => LoginScreen(),
+                      builder: (ctx) => Login(),
                     ));
                   },
                   child: const Text(

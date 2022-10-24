@@ -1,6 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 import 'house_detail.dart';
@@ -59,23 +60,25 @@ class ListOfItems extends StatelessWidget {
                       child: FadeInAnimation(
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (ctx) => HouseDetail(
-                                  image: houseData.houseList[index].image,
-                                  description:
-                                      houseData.houseList[index].description,
-                                  title: houseData.houseList[index].title,
-                                  isFavorite:
-                                      houseData.houseList[index].isFavorite,
-                                  location: houseData.houseList[index].location,
-                                  price: houseData.houseList[index].price,
-                                  type: houseData.houseList[index].type,
-                                  area: houseData.houseList[index].area,
-                                  facility: houseData.houseList[index].facility,
-                                ),
-                              ),
-                            );
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.fade,
+                                    child: HouseDetail(
+                                      image: houseData.houseList[index].image,
+                                      description: houseData
+                                          .houseList[index].description,
+                                      title: houseData.houseList[index].title,
+                                      isFavorite:
+                                          houseData.houseList[index].isFavorite,
+                                      location:
+                                          houseData.houseList[index].location,
+                                      price: houseData.houseList[index].price,
+                                      type: houseData.houseList[index].type,
+                                      area: houseData.houseList[index].area,
+                                      facility:
+                                          houseData.houseList[index].facility,
+                                    )));
                           },
                           child: Container(
                             margin: EdgeInsets.only(

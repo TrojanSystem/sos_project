@@ -25,13 +25,8 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
         elevation: 0,
       ),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              const Color.fromRGBO(40, 53, 147, 1),
-              const Color.fromRGBO(40, 53, 147, 1).withOpacity(0.9)
-            ],
-          ),
+        decoration: const BoxDecoration(
+          color: Color.fromRGBO(40, 53, 147, 1),
         ),
         child: AnimationLimiter(
           child: widget.houseType.isNotEmpty
@@ -213,14 +208,13 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
               : Center(
                   child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.dangerous,
-                      color: Colors.red,
-                      size: 50,
+                  children: [
+                    Image.asset(
+                      'images/no-data.png',
+                      width: 150,
                     ),
-                    Text(
-                      'No Entry',
+                    const Text(
+                      'No Data Entry',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 35,

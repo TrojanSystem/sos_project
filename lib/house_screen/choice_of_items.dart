@@ -192,6 +192,8 @@ class ChoiceOfItems extends StatelessWidget {
                                                 8, 8, 8, 8),
                                             height: 70,
                                             child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
                                               children: [
                                                 Expanded(
                                                   flex: 3,

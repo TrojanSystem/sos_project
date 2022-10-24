@@ -1,3 +1,4 @@
+import 'package:ada_bread/car_screen/car_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
@@ -5,8 +6,8 @@ import 'package:intl/intl.dart';
 import '../collection_methods.dart';
 
 class CarDetail extends StatefulWidget {
-  CarDetail({Key key}) : super(key: key);
-
+  CarDetail({this.carDetail});
+  CarModel carDetail;
   @override
   State<CarDetail> createState() => _CarDetailState();
 }
@@ -64,14 +65,14 @@ class _CarDetailState extends State<CarDetail> {
                     child: AnimationConfiguration.staggeredGrid(
                       position: 0,
                       duration: const Duration(milliseconds: 500),
-                      columnCount: columnCount,
+                      columnCount: 1,
                       child: ScaleAnimation(
                         duration: const Duration(milliseconds: 900),
                         curve: Curves.fastLinearToSlowEaseIn,
                         child: FadeInAnimation(
                           child: Container(
                             child: Image.asset(
-                              'images/1.png',
+                              widget.carDetail.image,
                               fit: BoxFit.contain,
                             ),
                             margin: EdgeInsets.only(
@@ -113,12 +114,12 @@ class _CarDetailState extends State<CarDetail> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(18.0, 8, 0, 15),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            18.0, 8, 0, 15),
                                         child: Text(
-                                          'Isuzu 2001 Model',
-                                          style: TextStyle(
+                                          widget.carDetail.title,
+                                          style: const TextStyle(
                                             decoration: TextDecoration.none,
                                             fontSize: 25,
                                             color: Colors.black,
@@ -127,14 +128,14 @@ class _CarDetailState extends State<CarDetail> {
                                         ),
                                       ),
                                       Row(
-                                        children: const [
-                                          Icon(
+                                        children: [
+                                          const Icon(
                                             Icons.location_on_outlined,
                                             size: 34,
                                           ),
                                           Text(
-                                            'Nazret, Ethiopia',
-                                            style: TextStyle(
+                                            widget.carDetail.location,
+                                            style: const TextStyle(
                                               decoration: TextDecoration.none,
                                               fontSize: 20,
                                               color: Colors.grey,
@@ -191,9 +192,10 @@ class _CarDetailState extends State<CarDetail> {
                                                 Container(
                                                   padding:
                                                       const EdgeInsets.all(8),
-                                                  child: const Text(
-                                                    'Auto',
-                                                    style: TextStyle(
+                                                  child: Text(
+                                                    widget
+                                                        .carDetail.transmission,
+                                                    style: const TextStyle(
                                                       decoration:
                                                           TextDecoration.none,
                                                       fontSize: 20,
@@ -214,9 +216,9 @@ class _CarDetailState extends State<CarDetail> {
                                                 Container(
                                                   padding:
                                                       const EdgeInsets.all(8),
-                                                  child: const Text(
-                                                    '100000',
-                                                    style: TextStyle(
+                                                  child: Text(
+                                                    widget.carDetail.mileage,
+                                                    style: const TextStyle(
                                                       decoration:
                                                           TextDecoration.none,
                                                       fontSize: 20,
@@ -237,9 +239,9 @@ class _CarDetailState extends State<CarDetail> {
                                                 Container(
                                                   padding:
                                                       const EdgeInsets.all(8),
-                                                  child: const Text(
-                                                    'Benzene',
-                                                    style: TextStyle(
+                                                  child: Text(
+                                                    widget.carDetail.fuel,
+                                                    style: const TextStyle(
                                                       decoration:
                                                           TextDecoration.none,
                                                       fontSize: 20,
@@ -262,10 +264,10 @@ class _CarDetailState extends State<CarDetail> {
                                   child: Container(
                                     padding: const EdgeInsets.fromLTRB(
                                         0.0, 0.0, 0.0, 15.0),
-                                    child: const Padding(
-                                      padding: EdgeInsets.all(12.0),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(12.0),
                                       child: Text(
-                                        ' we have to create an 1800 under air 2bedroom- 1 or 2 rooms extra to be used as gym and we have to create an 1800 under air 2bedroom- 1 or 2 rooms extra to be used as gym and we have to create an 1800 under air 2bedroom- 1 or 2 rooms extra to be used as gym and',
+                                        widget.carDetail.description,
                                         softWrap: true,
                                         textAlign: TextAlign.justify,
                                         maxLines: 3,
@@ -300,7 +302,7 @@ class _CarDetailState extends State<CarDetail> {
           ),
           Positioned(
             bottom: 50,
-            right: 10,
+            right: MediaQuery.of(context).size.width / 13,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

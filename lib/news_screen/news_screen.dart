@@ -3,17 +3,20 @@ import 'package:ada_bread/news_screen/news_detail.dart';
 import 'package:ada_bread/news_screen/news_model.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class NewsScreen extends StatefulWidget {
-  NewsScreen({Key key}) : super(key: key);
+  const NewsScreen({Key key}) : super(key: key);
 
   @override
   State<NewsScreen> createState() => _NewsScreenState();
 }
 
-class _NewsScreenState extends State<NewsScreen> {
+class _NewsScreenState extends State<NewsScreen> with TickerProviderStateMixin {
   List<TransactionModel> recips = [];
+  AnimationController _animationController;
+  Animation<double> _animation;
   bool _isLoading = false;
   int columnCount = 2;
   Future<void> getNews() async {
@@ -27,15 +30,18 @@ class _NewsScreenState extends State<NewsScreen> {
   }
 
   @override
-  void initState() {
-    recips;
-    getNews();
-    super.initState();
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(microseconds: 1200));
+    recips;
+    getNews();
+    super.initState();
   }
 
   @override
@@ -43,8 +49,16 @@ class _NewsScreenState extends State<NewsScreen> {
     double _w = MediaQuery.of(context).size.width;
     return Scaffold(
       body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
+          ?
+          // const Center(
+          //         child: CircularProgressIndicator(),
+          //       )
+          Center(
+              child: SpinKitSpinningLines(
+                color: Colors.blue[800],
+                size: 80.0,
+                lineWidth: 2,
+              ),
             )
           : Container(
               decoration: BoxDecoration(

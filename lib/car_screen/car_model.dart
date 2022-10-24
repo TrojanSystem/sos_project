@@ -1,174 +1,98 @@
 import 'package:flutter/foundation.dart';
 
-class HouseModel {
+class CarModel {
   String title;
   String description;
-  String area;
+  String make;
   String type;
-  String price;
+  String color;
   String image;
-  Map facility;
+  String exchangePossible;
+  String condition;
+
+  String fuel;
   String location;
+  String capacity;
+  String transmission;
+  String year;
+  String price;
+  String mileage;
   bool isFavorite = false;
-  HouseModel(
-      {@required this.description,
-      @required this.title,
-      @required this.type,
-      @required this.price,
-      @required this.image,
-      @required this.area,
-      @required this.facility,
-      @required this.isFavorite,
-      @required this.location});
+  CarModel({
+    @required this.type,
+    @required this.price,
+    @required this.image,
+    @required this.description,
+    @required this.location,
+    @required this.title,
+    @required this.isFavorite,
+    @required this.year,
+    @required this.capacity,
+    @required this.color,
+    @required this.condition,
+    @required this.exchangePossible,
+    @required this.fuel,
+    @required this.make,
+    @required this.mileage,
+    @required this.transmission,
+  });
 }
 
-class HouseData extends ChangeNotifier {
-  List<HouseModel> houseList = [
-    HouseModel(
-      description:
-          '140 ካሬ ላይ ያረፈ L ላይ ያለ ለንግድ ሚሆን ቦታ ያለው፣ መብራት እና ዉሃ የገባለት ከበቂ የመኪና መቆሚያ ጋር ለሽያጭ ቀርቧል።',
-      title: '140 m\u00B2 House, Dukem ',
-      area: '140 m\u00B2',
-      facility: {
-        'beds': 3,
-        'bath': 2,
-        'parking': 1,
-        'area': '140m\u00B2',
-      },
+class CarData extends ChangeNotifier {
+  List<CarModel> carList = [
+    CarModel(
+      type: 'Toyota',
+      price: '1,000,000',
+      image: 'images/car_4.jpg',
+      description: 'ምንም ግጭት የሌለባት ',
+      location: 'Adama, Ethiopia',
+      title: 'Vitz 2006',
       isFavorite: false,
-      location: 'Dukem, Ethiopia',
-      image: 'images/house_6.jpg',
-      type: 'apartment',
-      price: '3,800,000',
+      year: '2006',
+      capacity: '1000 cc',
+      color: 'Silver',
+      condition: 'Ethiopia Used',
+      exchangePossible: 'No',
+      fuel: 'Benzene',
+      make: 'Toyota',
+      mileage: '1500',
+      transmission: 'Auto',
     ),
-    HouseModel(
-        description:
-            '140 ካሬ ላይ ያረፈ መንገድ ዳር ላይ ያለ ሶስት ሚከራይ ሰርቪስ ያለው ፣ መብራት እና ዉሃ የገባለት, ከበቂ የመኪና መቆሚያ ጋር ለሽያጭ ቀርቧል።',
-        title: '140 m\u00B2 House, Dukem ',
-        area: '140 m\u00B2',
-        facility: {
-          'beds': 3,
-          'bath': 3,
-          'parking': 1,
-          'area': '140m\u00B2',
-        },
-        isFavorite: false,
-        location: 'Dukem, Ethiopia',
-        image: 'images/house_2.jpg',
-        type: 'house',
-        price: '3,800,000'),
-    HouseModel(
-      description:
-          '140 ካሬ ላይ ያረፈ L ላይ ያለ ለንግድ ሚሆን ቦታ ያለው፣ፊኒሺንግ ያለቀለት፣ መብራት እና ዉሃ የገባለት ከበቂ የመኪና መቆሚያ ጋር ለሽያጭ ቀርቧል።',
-      title: '140 m\u00B2 House, Dukem ',
-      area: '140 m\u00B2',
-      facility: {
-        'beds': 3,
-        'bath': 2,
-        'parking': 1,
-        'area': '140m\u00B2',
-      },
-      type: 'house',
-      price: '3,800,000',
+    CarModel(
+      type: 'Suzuki',
+      price: '250,000',
+      image: 'images/car_3.jpg',
+      description: 'ምንም ግጭት የሌለባት, አስራ ሁለት ሺ ቤት ',
+      location: 'Dukem, Ethiopia',
+      title: 'TVS Bajaj',
       isFavorite: false,
-      location: 'Dukem, Ethiopia',
-      image: 'images/house_3.jpg',
+      year: '2006',
+      capacity: '200 cc',
+      color: 'Blue',
+      condition: 'Used',
+      exchangePossible: 'No',
+      fuel: 'Benzene',
+      make: 'TVS',
+      mileage: '150',
+      transmission: 'Auto',
     ),
-    HouseModel(
-        description:
-            '140 ካሬ ላይ ያረፈ L ላይ ያለ ለንግድ ሚሆን ቦታ ያለው፣ መብራት እና ዉሃ የገባለት ከበቂ የመኪና መቆሚያ ጋር ለሽያጭ ቀርቧል።',
-        title: '140 m\u00B2 House, Dukem ',
-        area: '140 m\u00B2',
-        facility: {
-          'beds': 3,
-          'bath': 2,
-          'parking': 1,
-          'area': '140m\u00B2',
-        },
-        isFavorite: false,
-        location: 'Dukem, Ethiopia',
-        image: 'images/house_4.jpg',
-        type: 'house',
-        price: '3,800,000'),
-    HouseModel(
-        description:
-            '140 ካሬ ላይ ያረፈ ሚከራይ ሰርቪሶች ያሉት፣ መብራት እና ዉሃ የገባለት ከበቂ የመኪና መቆሚያ ጋር ለሽያጭ ቀርቧል።',
-        title: '140 m\u00B2 House, Dukem ',
-        area: '140 m\u00B2',
-        facility: {
-          'beds': 3,
-          'bath': 1,
-          'parking': 2,
-          'area': '140m\u00B2',
-        },
-        isFavorite: false,
-        location: 'Dukem, Ethiopia',
-        image: 'images/house_5.jpg',
-        type: 'house',
-        price: '3,800,000'),
-    HouseModel(
-        description:
-            '200 ካሬ ላይ ያረፈ ልስን ያለቀለት፣ ዉሃ የገባለት ከበቂ የመኪና መቆሚያ ጋር ለሽያጭ ቀርቧል።',
-        title: '140 m\u00B2 House, Dukem ',
-        area: '140 m\u00B2',
-        facility: {
-          'beds': 3,
-          'bath': 2,
-          'parking': 1,
-          'area': '140m\u00B2',
-        },
-        isFavorite: false,
-        location: 'Dukem, Ethiopia',
-        image: 'images/house_1.jpg',
-        type: 'house',
-        price: '3,800,000'),
-    HouseModel(
-        description:
-            '200 ካሬ ላይ ያረፈ ከዋናው መንገድ 10M ገባ ያለ ፣መብራት እና ዉሃ የገባለት ከበቂ የመኪና መቆሚያ ጋር ለሽያጭ ቀርቧል።',
-        title: '140 m\u00B2 House, Dukem ',
-        area: '140 m\u00B2',
-        facility: {
-          'beds': 3,
-          'bath': 2,
-          'parking': 1,
-          'area': '200m\u00B2',
-        },
-        isFavorite: false,
-        location: 'Dukem, Ethiopia',
-        image: 'images/house_7.jpg',
-        type: 'house',
-        price: '3,800,000'),
-    HouseModel(
-        description:
-            '140 ካሬ ላይ ያረፈ L ላይ ያለ፣ ያለቀለት፣ ለንግድ ሚሆን ቦታ ያለው፣ መብራት እና ዉሃ የገባለት ከበቂ የመኪና መቆሚያ ጋር ለሽያጭ ቀርቧል።',
-        title: '140 m\u00B2 House, Dukem ',
-        area: '140 m\u00B2',
-        facility: {
-          'beds': 3,
-          'bath': 2,
-          'parking': 1,
-          'area': '140m\u00B2',
-        },
-        isFavorite: false,
-        location: 'Dukem, Ethiopia',
-        image: 'images/house_8.jpg',
-        type: 'house',
-        price: '3,800,000'),
-    HouseModel(
-        description:
-            '140 ካሬ ላይ ያረፈ L ላይ ያለ፣ ያለቀለት፣ ለንግድ ሚሆን ቦታ ያለው፣ መብራት እና ዉሃ የገባለት ከበቂ የመኪና መቆሚያ ጋር ለሽያጭ ቀርቧል።',
-        title: '140 m\u00B2 House, Dukem ',
-        area: '140 m\u00B2',
-        facility: {
-          'beds': 3,
-          'bath': 2,
-          'parking': 1,
-          'area': '140m\u00B2',
-        },
-        isFavorite: false,
-        location: 'Dukem, Ethiopia',
-        image: 'images/house_9.jpg',
-        type: 'house',
-        price: '3,800,000')
+    CarModel(
+      type: 'Mazda',
+      price: '1,100,000',
+      image: 'images/car_5.png',
+      description: 'ምንም ግጭት የሌለባት, ሞተሯ የታደሰ ',
+      location: 'Adama, Ethiopia',
+      title: 'Isuzu 2001',
+      isFavorite: false,
+      year: '2001',
+      capacity: '2400 cc',
+      color: 'White',
+      condition: 'Ethiopia Used',
+      exchangePossible: 'No',
+      fuel: 'Diesel',
+      make: 'Isuzu',
+      mileage: '70,000',
+      transmission: 'Manual',
+    ),
   ];
 }
