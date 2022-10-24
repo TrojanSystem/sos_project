@@ -376,13 +376,15 @@ class _CarDetailState extends State<CarDetail> {
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Icon(
-                  _likedItem ? Icons.favorite : Icons.favorite_border,
+                  widget.carDetail.isFavorite
+                      ? Icons.favorite
+                      : Icons.favorite_border,
                   color: Colors.pink[800],
                 ),
               ),
               onPressed: () {
                 setState(() {
-                  _likedItem = !_likedItem;
+                  widget.carDetail.isFavorite = !widget.carDetail.isFavorite;
                 });
               },
             ),

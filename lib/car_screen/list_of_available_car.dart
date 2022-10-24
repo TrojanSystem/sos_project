@@ -156,7 +156,8 @@ class _ListOfAvailableCarsState extends State<ListOfAvailableCars> {
                                                 padding:
                                                     const EdgeInsets.all(15.0),
                                                 child: Icon(
-                                                  _likedItem
+                                                  widget.carType[index]
+                                                          .isFavorite
                                                       ? Icons.favorite
                                                       : Icons.favorite_border,
                                                   color: Colors.pink[800],
@@ -164,7 +165,10 @@ class _ListOfAvailableCarsState extends State<ListOfAvailableCars> {
                                               ),
                                               onPressed: () {
                                                 setState(() {
-                                                  _likedItem = !_likedItem;
+                                                  widget.carType[index]
+                                                          .isFavorite =
+                                                      !widget.carType[index]
+                                                          .isFavorite;
                                                 });
                                               },
                                             ),

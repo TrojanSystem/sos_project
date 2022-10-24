@@ -177,7 +177,7 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                                   padding: const EdgeInsets.all(
                                                       15.0),
                                                   child: Icon(
-                                                    _likedItem
+                                                    typeFilter[index].isFavorite
                                                         ? Icons.favorite
                                                         : Icons.favorite_border,
                                                     color: Colors.pink[800],
@@ -185,7 +185,10 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                                 ),
                                                 onPressed: () {
                                                   setState(() {
-                                                    _likedItem = !_likedItem;
+                                                    typeFilter[index]
+                                                            .isFavorite =
+                                                        !typeFilter[index]
+                                                            .isFavorite;
                                                   });
                                                 },
                                               ),
