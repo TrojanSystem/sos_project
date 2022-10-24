@@ -1,6 +1,8 @@
 import 'package:ada_bread/buying_process/loan_bank.dart';
 import 'package:flutter/material.dart';
 
+import 'buying_process/cash_buyer.dart';
+
 String dropdownvalue = 'Abyssinia';
 
 // List of items in our dropdown menu
@@ -19,43 +21,52 @@ Future<dynamic> buyingProcess(BuildContext context) {
           builder: (BuildContext context, StateSetter setState) {
         return AlertDialog(
           actions: [
-            Container(
-              margin: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    const Color.fromRGBO(40, 53, 147, 1),
-                    const Color.fromRGBO(40, 53, 147, 1).withOpacity(0.9)
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => const CashBuyer(),
+                  ),
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      const Color.fromRGBO(40, 53, 147, 1),
+                      const Color.fromRGBO(40, 53, 147, 1).withOpacity(0.9)
+                    ],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      blurRadius: 4,
+                      offset: const Offset(4, 8), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                padding: const EdgeInsets.fromLTRB(16.0, 8, 8, 8),
+                child: Row(
+                  children: [
+                    Image.asset(
+                      'images/cash-bag.png',
+                      width: 33,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    const Text(
+                      'CASH',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 20),
+                    )
                   ],
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
-                    blurRadius: 4,
-                    offset: const Offset(4, 8), // changes position of shadow
-                  ),
-                ],
-                borderRadius: BorderRadius.circular(15),
-              ),
-              padding: const EdgeInsets.fromLTRB(16.0, 8, 8, 8),
-              child: Row(
-                children: [
-                  Image.asset(
-                    'images/cash-bag.png',
-                    width: 33,
-                    color: Colors.white,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Text(
-                    'CASH',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 20),
-                  )
-                ],
               ),
             ),
             Container(
@@ -112,7 +123,7 @@ Future<dynamic> buyingProcess(BuildContext context) {
                         value: items,
                         child: Text(
                           items,
-                          style: TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.black),
                         ),
                       );
                     }).toList(),

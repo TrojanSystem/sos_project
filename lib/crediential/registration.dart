@@ -75,7 +75,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
     if (isValid) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (ctx) => HomePage(),
+          builder: (ctx) => const HomePage(),
         ),
       );
     }
