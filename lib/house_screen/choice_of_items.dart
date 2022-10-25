@@ -33,7 +33,8 @@ class ChoiceOfItems extends StatelessWidget {
 
         return Expanded(
           flex: 1,
-          child: Padding(
+          child: Container(
+            margin: EdgeInsets.only(top: 10),
             padding: const EdgeInsets.all(0.0),
             child: AnimatedContainer(
               decoration: BoxDecoration(
@@ -55,7 +56,7 @@ class ChoiceOfItems extends StatelessWidget {
               curve: Curves.fastLinearToSlowEaseIn,
               height: 200,
               width: double.infinity,
-              child: Column(
+              child: ListView(
                 children: [
                   Expanded(
                     flex: 2,
@@ -88,7 +89,7 @@ class ChoiceOfItems extends StatelessWidget {
                                       child: FadeInAnimation(
                                         child: Container(
                                           margin: EdgeInsets.only(
-                                            bottom: _w / 60,
+                                            bottom: _w / 100,
                                             top: _w / 30,
                                             left: _w / 30,
                                             right: _w / 60,

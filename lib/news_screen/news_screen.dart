@@ -115,16 +115,17 @@ class _NewsScreenState extends State<NewsScreen> with TickerProviderStateMixin {
                                     ),
                                   ),
                                   footer: GridTileBar(
-                                    backgroundColor: Colors.transparent,
+                                    backgroundColor:
+                                        Colors.grey.withOpacity(0.8),
                                     title: Text(
                                       recips[index].title,
                                       style: const TextStyle(
                                         overflow: TextOverflow.ellipsis,
                                         fontSize: 15,
-                                        color: Colors.black54,
+                                        color: Colors.black,
                                         fontWeight: FontWeight.w900,
                                       ),
-                                      textAlign: TextAlign.center,
+                                      textAlign: TextAlign.start,
                                     ),
                                   ),
                                 ),

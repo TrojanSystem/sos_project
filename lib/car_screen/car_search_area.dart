@@ -26,7 +26,7 @@ class CarSearchArea extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Padding(
-            padding: EdgeInsets.only(left: 8.0, bottom: 10),
+            padding: EdgeInsets.only(left: 8.0, bottom: 5),
             child: Text(
               'Let\'s Find Car as ',
               style: TextStyle(
@@ -66,7 +66,7 @@ class CarSearchArea extends StatelessWidget {
                       ),
                     ),
                   ),
-                  margin: const EdgeInsets.fromLTRB(30, 18, 30, 8),
+                  margin: const EdgeInsets.fromLTRB(30, 5, 30, 8),
                 ),
               ),
               Expanded(

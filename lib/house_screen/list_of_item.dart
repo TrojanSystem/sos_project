@@ -82,7 +82,7 @@ class ListOfItems extends StatelessWidget {
                           },
                           child: Container(
                             margin: EdgeInsets.only(
-                                bottom: _w / 30, left: _w / 60, right: _w / 60),
+                                bottom: _w / 60, left: _w / 60, right: _w / 60),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius:

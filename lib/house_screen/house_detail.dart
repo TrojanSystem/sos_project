@@ -91,8 +91,8 @@ class _HouseDetailState extends State<HouseDetail> {
                               widget.image,
                               fit: BoxFit.contain,
                             ),
-                            margin: EdgeInsets.only(
-                                bottom: _w / 30, left: _w / 60, right: _w / 60),
+                            margin:
+                                EdgeInsets.only(left: _w / 60, right: _w / 60),
                             clipBehavior: Clip.antiAlias,
                             decoration: BoxDecoration(
                               color: Colors.transparent,
@@ -137,7 +137,7 @@ class _HouseDetailState extends State<HouseDetail> {
                                           widget.title,
                                           style: const TextStyle(
                                             decoration: TextDecoration.none,
-                                            fontSize: 25,
+                                            fontSize: 18,
                                             color: Colors.black,
                                             fontWeight: FontWeight.w900,
                                           ),
@@ -147,13 +147,13 @@ class _HouseDetailState extends State<HouseDetail> {
                                         children: [
                                           const Icon(
                                             Icons.location_on_outlined,
-                                            size: 34,
+                                            size: 25,
                                           ),
                                           Text(
                                             widget.location,
                                             style: const TextStyle(
                                               decoration: TextDecoration.none,
-                                              fontSize: 20,
+                                              fontSize: 18,
                                               color: Colors.grey,
                                               fontWeight: FontWeight.w900,
                                             ),
@@ -198,12 +198,15 @@ class _HouseDetailState extends State<HouseDetail> {
                                                             children: [
                                                               Image.asset(
                                                                 'images/double-bed.png',
-                                                                width: 25,
+                                                                width: 20,
                                                               ),
                                                               Container(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .all(8),
+                                                                            .only(
+                                                                        left: 8,
+                                                                        right:
+                                                                            8),
                                                                 child: Text(
                                                                   '${widget.facility['beds']} beds',
                                                                   style:
@@ -212,7 +215,7 @@ class _HouseDetailState extends State<HouseDetail> {
                                                                         TextDecoration
                                                                             .none,
                                                                     fontSize:
-                                                                        20,
+                                                                        18,
                                                                     color: Colors
                                                                         .grey,
                                                                     fontWeight:
@@ -227,12 +230,15 @@ class _HouseDetailState extends State<HouseDetail> {
                                                             children: [
                                                               Image.asset(
                                                                 'images/bath.png',
-                                                                width: 25,
+                                                                width: 20,
                                                               ),
                                                               Container(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .all(8),
+                                                                            .only(
+                                                                        left: 8,
+                                                                        right:
+                                                                            8),
                                                                 child: Text(
                                                                   '${widget.facility['bath']} bath',
                                                                   style:
@@ -241,7 +247,7 @@ class _HouseDetailState extends State<HouseDetail> {
                                                                         TextDecoration
                                                                             .none,
                                                                     fontSize:
-                                                                        20,
+                                                                        18,
                                                                     color: Colors
                                                                         .grey,
                                                                     fontWeight:
@@ -256,12 +262,15 @@ class _HouseDetailState extends State<HouseDetail> {
                                                             children: [
                                                               Image.asset(
                                                                 'images/parking-sign.png',
-                                                                width: 25,
+                                                                width: 20,
                                                               ),
                                                               Container(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .all(8),
+                                                                            .only(
+                                                                        left: 8,
+                                                                        right:
+                                                                            8),
                                                                 child: Text(
                                                                   '${widget.facility['parking']} parking',
                                                                   style:
@@ -270,7 +279,7 @@ class _HouseDetailState extends State<HouseDetail> {
                                                                         TextDecoration
                                                                             .none,
                                                                     fontSize:
-                                                                        20,
+                                                                        18,
                                                                     color: Colors
                                                                         .grey,
                                                                     fontWeight:
@@ -285,12 +294,15 @@ class _HouseDetailState extends State<HouseDetail> {
                                                             children: [
                                                               Image.asset(
                                                                 'images/area.png',
-                                                                width: 25,
+                                                                width: 20,
                                                               ),
                                                               Container(
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .all(8),
+                                                                            .only(
+                                                                        left: 8,
+                                                                        right:
+                                                                            8),
                                                                 child: Text(
                                                                   '${widget.facility['area']}',
                                                                   style:
@@ -299,7 +311,7 @@ class _HouseDetailState extends State<HouseDetail> {
                                                                         TextDecoration
                                                                             .none,
                                                                     fontSize:
-                                                                        20,
+                                                                        18,
                                                                     color: Colors
                                                                         .grey,
                                                                     fontWeight:
@@ -319,14 +331,14 @@ class _HouseDetailState extends State<HouseDetail> {
                                             ],
                                           ),
                                           margin: EdgeInsets.only(
-                                              bottom: _w / 60,
+                                              bottom: _w / 10,
                                               left: _w / 60,
                                               right: _w / 60),
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
                                                 const BorderRadius.all(
-                                                    Radius.circular(20)),
+                                                    Radius.circular(5)),
                                             boxShadow: [
                                               BoxShadow(
                                                 color: Colors.black
@@ -343,28 +355,26 @@ class _HouseDetailState extends State<HouseDetail> {
                                 ),
                                 Expanded(
                                   flex: 2,
-                                  child: Container(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        0.0, 0.0, 0.0, 15.0),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Text(
-                                        widget.description,
-                                        softWrap: true,
-                                        textAlign: TextAlign.justify,
-                                        maxLines: 3,
-                                      ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Text(
+                                      widget.description,
+                                      softWrap: true,
+                                      textAlign: TextAlign.justify,
+                                      maxLines: 5,
                                     ),
                                   ),
                                 )
                               ],
                             ),
                             margin: EdgeInsets.only(
-                                bottom: _w / 60, left: _w / 60, right: _w / 60),
+                                //  top: _w / 20,
+                                bottom: _w / 20,
+                                left: _w / 60,
+                                right: _w / 60),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(20)),
+                              borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.1),

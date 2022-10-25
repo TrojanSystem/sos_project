@@ -24,7 +24,7 @@ class HouseScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: MediaQuery.of(context).size.height * 0.75,
+          height: MediaQuery.of(context).size.height * 0.72,
           child: Column(
             children: [
               ChoiceOfItems(columnCount: columnCount, w: _w),

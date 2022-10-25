@@ -76,7 +76,9 @@ class _CarDetailState extends State<CarDetail> {
                               fit: BoxFit.contain,
                             ),
                             margin: EdgeInsets.only(
-                                bottom: _w / 30, left: _w / 60, right: _w / 60),
+                              bottom: _w / 60,
+                              top: _w / 10,
+                            ),
                             clipBehavior: Clip.antiAlias,
                             decoration: BoxDecoration(
                               color: Colors.transparent,
@@ -121,7 +123,7 @@ class _CarDetailState extends State<CarDetail> {
                                           widget.carDetail.title,
                                           style: const TextStyle(
                                             decoration: TextDecoration.none,
-                                            fontSize: 25,
+                                            fontSize: 18,
                                             color: Colors.black,
                                             fontWeight: FontWeight.w900,
                                           ),
@@ -129,9 +131,12 @@ class _CarDetailState extends State<CarDetail> {
                                       ),
                                       Row(
                                         children: [
-                                          const Icon(
-                                            Icons.location_on_outlined,
-                                            size: 34,
+                                          const Padding(
+                                            padding: EdgeInsets.only(left: 8.0),
+                                            child: Icon(
+                                              Icons.location_on_outlined,
+                                              size: 20,
+                                            ),
                                           ),
                                           Text(
                                             widget.carDetail.location,
@@ -164,7 +169,7 @@ class _CarDetailState extends State<CarDetail> {
                                               children: [
                                                 Image.asset(
                                                   'images/speedometer.png',
-                                                  width: 40,
+                                                  width: 20,
                                                 ),
                                                 Container(
                                                   padding:
@@ -174,7 +179,7 @@ class _CarDetailState extends State<CarDetail> {
                                                     style: TextStyle(
                                                       decoration:
                                                           TextDecoration.none,
-                                                      fontSize: 20,
+                                                      fontSize: 18,
                                                       color: Colors.grey,
                                                       fontWeight:
                                                           FontWeight.w900,
@@ -187,7 +192,7 @@ class _CarDetailState extends State<CarDetail> {
                                               children: [
                                                 Image.asset(
                                                   'images/shift-stick.png',
-                                                  width: 40,
+                                                  width: 20,
                                                 ),
                                                 Container(
                                                   padding:
@@ -198,7 +203,7 @@ class _CarDetailState extends State<CarDetail> {
                                                     style: const TextStyle(
                                                       decoration:
                                                           TextDecoration.none,
-                                                      fontSize: 20,
+                                                      fontSize: 18,
                                                       color: Colors.grey,
                                                       fontWeight:
                                                           FontWeight.w900,
@@ -211,7 +216,7 @@ class _CarDetailState extends State<CarDetail> {
                                               children: [
                                                 Image.asset(
                                                   'images/mileage.png',
-                                                  width: 40,
+                                                  width: 20,
                                                 ),
                                                 Container(
                                                   padding:
@@ -221,7 +226,7 @@ class _CarDetailState extends State<CarDetail> {
                                                     style: const TextStyle(
                                                       decoration:
                                                           TextDecoration.none,
-                                                      fontSize: 20,
+                                                      fontSize: 18,
                                                       color: Colors.grey,
                                                       fontWeight:
                                                           FontWeight.w900,
@@ -234,7 +239,7 @@ class _CarDetailState extends State<CarDetail> {
                                               children: [
                                                 Image.asset(
                                                   'images/fuel.png',
-                                                  width: 40,
+                                                  width: 20,
                                                 ),
                                                 Container(
                                                   padding:
@@ -244,7 +249,7 @@ class _CarDetailState extends State<CarDetail> {
                                                     style: const TextStyle(
                                                       decoration:
                                                           TextDecoration.none,
-                                                      fontSize: 20,
+                                                      fontSize: 18,
                                                       color: Colors.grey,
                                                       fontWeight:
                                                           FontWeight.w900,
@@ -278,7 +283,7 @@ class _CarDetailState extends State<CarDetail> {
                               ],
                             ),
                             margin: EdgeInsets.only(
-                                bottom: _w / 60, left: _w / 60, right: _w / 60),
+                                bottom: _w / 20, left: _w / 60, right: _w / 60),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius:
@@ -302,7 +307,7 @@ class _CarDetailState extends State<CarDetail> {
           ),
           Positioned(
             bottom: 50,
-            right: MediaQuery.of(context).size.width / 13,
+            right: 10,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

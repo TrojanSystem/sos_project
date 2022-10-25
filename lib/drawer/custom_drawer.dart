@@ -53,8 +53,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
               CustomListTile(
                 isCollapsed: _isCollapsed,
-                icon: Icons.pin_drop,
-                title: 'Destinations',
+                icon: Icons.bookmark_add_rounded,
+                title: 'Bookmark',
                 infoCount: 0,
                 doHaveMoreOptions: Icons.arrow_forward_ios,
               ),

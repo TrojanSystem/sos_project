@@ -108,7 +108,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
           child: ListView(
             children: [
               SizedBox(
-                height: size.height * 0.1,
+                height: size.height * 0.05,
               ),
               const Text(
                 'SignUp',
@@ -118,7 +118,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                     fontSize: 30),
               ),
               const SizedBox(
-                height: 10,
+                height: 5,
               ),
               RichText(
                 text: TextSpan(
@@ -146,7 +146,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                 ),
               ),
               const SizedBox(
-                height: 40,
+                height: 25,
               ),
               Form(
                 key: _signUpFormKey,
@@ -365,7 +365,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                 ),
               ),
               const SizedBox(
-                height: 80,
+                height: 40,
               ),
               GestureDetector(
                 onTap: () async {

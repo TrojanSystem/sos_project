@@ -83,7 +83,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
             child: ListView(
               children: [
                 SizedBox(
-                  height: size.height * 0.1,
+                  height: size.height * 0.05,
                 ),
                 const Text(
                   'Login',
@@ -232,7 +232,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                   ),
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 25,
                 ),
                 GestureDetector(
                   onTap: () async {
@@ -268,7 +268,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                   ),
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: MediaQuery.of(context).size.height * 0.06,
                 ),
                 Row(
                   children: [

@@ -68,13 +68,13 @@ class FrontScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (ctx) => SignUp(),
+                      builder: (ctx) => const SignUp(),
                     ));
                   },
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(50, 10, 50, 0),
                     width: double.infinity,
-                    height: 60.0,
+                    height: MediaQuery.of(context).size.height * 0.05,
                     decoration: BoxDecoration(
                       color: Colors.green[500],
                       borderRadius: BorderRadius.circular(30.0),

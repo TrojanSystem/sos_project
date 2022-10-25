@@ -38,7 +38,7 @@ class _CarHomeScreenState extends State<CarHomeScreen> {
           child: Column(
             children: [
               Container(
-                height: 50,
+                height: 10,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -86,7 +86,7 @@ class _CarHomeScreenState extends State<CarHomeScreen> {
                                   child: FadeInAnimation(
                                     child: Container(
                                       margin: EdgeInsets.only(
-                                          bottom: _w / 30,
+                                          bottom: _w / 60,
                                           left: _w / 60,
                                           right: _w / 60),
                                       decoration: BoxDecoration(
