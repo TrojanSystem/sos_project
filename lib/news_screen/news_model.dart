@@ -1,4 +1,5 @@
 class TransactionModel {
+  Map source;
   String author;
   String title;
   String description;
@@ -8,6 +9,7 @@ class TransactionModel {
   String content;
 
   TransactionModel({
+    this.source,
     this.title,
     this.content,
     this.author,
@@ -19,6 +21,7 @@ class TransactionModel {
 
   Map<String, dynamic> toMap() {
     return {
+      'source': source,
       'author': author,
       'title': title,
       'description': description,
@@ -31,6 +34,7 @@ class TransactionModel {
 
   static TransactionModel fromMap(Map<String, dynamic> map) {
     return TransactionModel(
+        source: map['source'],
         author: map['author'],
         title: map['title'],
         description: map['description'],

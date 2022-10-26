@@ -56,21 +56,13 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
-          physics: const BouncingScrollPhysics(),
+        body: const TabBarView(
+          physics: BouncingScrollPhysics(),
           dragStartBehavior: DragStartBehavior.down,
           children: [
-            const HouseScreen(),
-            const CarHomeScreen(),
-            Container(
-              color: Colors.grey[200],
-              child: const Center(
-                child: Text(
-                  'Tender Screen',
-                  style: TextStyle(fontSize: 50),
-                ),
-              ),
-            ),
+            HouseScreen(),
+            CarHomeScreen(),
+            NewsScreen(),
             NewsScreen(),
           ],
         ),
