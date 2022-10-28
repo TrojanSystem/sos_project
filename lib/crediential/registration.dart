@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -23,6 +24,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
+  final _firebaseStorage = FirebaseStorage.instance;
   AnimationController _animationController;
   final _auth = FirebaseAuth.instance;
   Animation<double> _animation;
@@ -35,7 +37,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
 
   final TextEditingController _phoneNumberController =
       TextEditingController(text: '');
-
+  String imageUrl = '';
   final FocusNode _emailFocusNode = FocusNode();
   final FocusNode _passFocusNode = FocusNode();
   final FocusNode _postitionCPFocusNode = FocusNode();
@@ -110,7 +112,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                   imageUrl:
                       "https://www.dreamgrow.com/wp-content/uploads/2018/11/brokerspic.jpg",
                   placeholder: (context, url) => Image.network(
-                    'https://images.unsplash.com/photo-1585144860106-998ca0f2922a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=604&q=80',
+                    'https://images.unsplash.com/photo-1423666639041-f56000c27a9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80',
                     fit: BoxFit.fill,
                   ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -427,7 +429,8 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                                   'userFullName': userFullName,
                                   'userEmail': userEmail,
                                   'userPhoneNumber': userPhone,
-                                  'loggedDate': DateTime.now().toString()
+                                  'loggedDate': DateTime.now().toString(),
+                                  'profilePic': imageUrl,
                                 });
                                 Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
@@ -558,6 +561,22 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
       maxHeight: 1080,
       maxWidth: 1080,
     );
+    var file = File(pickedFile.path);
+
+    if (pickedFile != null) {
+      //Upload to Firebase
+      var snapshot = await _firebaseStorage
+          .ref()
+          .child('profileImages/imageName')
+          .putFile(file);
+      var downloadUrl = await snapshot.ref.getDownloadURL();
+      setState(() {
+        imageUrl = downloadUrl;
+      });
+    } else {
+      print('No Image Path Received');
+    }
+
     setState(() {
       imageFile = File(pickedFile.path);
     });
@@ -571,6 +590,22 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
       maxHeight: 1080,
       maxWidth: 1080,
     );
+    var file = File(pickedFile.path);
+
+    if (pickedFile != null) {
+      //Upload to Firebase
+      Reference ref = _firebaseStorage
+          .ref()
+          .child("ProfilePic" + DateTime.now().toString());
+      UploadTask uploadTask = ref.putFile(file);
+      uploadTask.whenComplete(() async {
+        imageUrl = await ref.getDownloadURL();
+      }).catchError((onError) {
+        print(onError);
+      });
+    } else {
+      print('No Image Path Received');
+    }
     setState(() {
       imageFile = File(pickedFile.path);
     });

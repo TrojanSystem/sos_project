@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../profile/bookmarked_items.dart';
+
 class CustomListTile extends StatelessWidget {
   final bool isCollapsed;
+  final Function onClick;
   final IconData icon;
   final String title;
   final IconData doHaveMoreOptions;
   final int infoCount;
 
   const CustomListTile({
+    this.onClick,
     this.isCollapsed,
     this.icon,
     this.title,
@@ -18,7 +22,7 @@ class CustomListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onClick,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
         width: isCollapsed ? 300 : 80,
@@ -104,7 +108,13 @@ class CustomListTile extends StatelessWidget {
                           color: Colors.white,
                           size: 12,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (ctx) => BookmarkedItems(),
+                            ),
+                          );
+                        },
                       )
                     : const Center(),
               ),

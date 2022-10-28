@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:intl/intl.dart';
 
 import 'house_detail.dart';
+
+final _auth = FirebaseAuth.instance;
 
 class ListOfAvailableHouse extends StatefulWidget {
   ListOfAvailableHouse({this.type, this.houseType});
@@ -14,11 +18,12 @@ class ListOfAvailableHouse extends StatefulWidget {
 }
 
 class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
-  bool _likedItem = false;
+  NumberFormat numberFormat = NumberFormat.decimalPattern('en_us');
 
   @override
   Widget build(BuildContext context) {
     double _w = MediaQuery.of(context).size.width;
+
     int columnCount = 3;
     return Scaffold(
       appBar: AppBar(
@@ -196,8 +201,11 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                                                     'facility'],
                                                             type: typeFilter[
                                                                 index]['type'],
-                                                            price: typeFilter[
-                                                                index]['price'],
+                                                            price: numberFormat
+                                                                .format(typeFilter[
+                                                                        index]
+                                                                    ['price'])
+                                                                .toString(),
                                                             location:
                                                                 typeFilter[
                                                                         index][
@@ -243,6 +251,42 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                                                     index]
                                                                 .id)
                                                             .update({
+                                                          'image':
+                                                              typeFilter[index]
+                                                                  ['image'],
+                                                          'description':
+                                                              typeFilter[index][
+                                                                  'description'],
+                                                          'title':
+                                                              typeFilter[index]
+                                                                  ['title'],
+                                                          'area':
+                                                              typeFilter[index]
+                                                                  ['area'],
+                                                          'facility':
+                                                              typeFilter[index]
+                                                                  ['facility'],
+                                                          'type':
+                                                              typeFilter[index]
+                                                                  ['type'],
+                                                          'price':
+                                                              typeFilter[index]
+                                                                  ['price'],
+                                                          'location':
+                                                              typeFilter[index]
+                                                                  ['location'],
+                                                          'isFavorite':
+                                                              !typeFilter[index]
+                                                                  [
+                                                                  'isFavorite'],
+                                                        });
+                                                        FirebaseFirestore
+                                                            .instance
+                                                            .collection(
+                                                                'Favorite')
+                                                            .add({
+                                                          'loggedUserID': _auth
+                                                              .currentUser.uid,
                                                           'image':
                                                               typeFilter[index]
                                                                   ['image'],

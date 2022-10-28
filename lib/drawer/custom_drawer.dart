@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../profile/bookmarked_items.dart';
 import 'bottom_user_info.dart';
 import 'custom_list_tile.dart';
 import 'header.dart';
@@ -52,6 +53,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 infoCount: 0,
               ),
               CustomListTile(
+                onClick: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (ctx) => BookmarkedItems(),
+                    ),
+                  );
+                },
                 isCollapsed: _isCollapsed,
                 icon: Icons.bookmark_add_rounded,
                 title: 'Bookmark',

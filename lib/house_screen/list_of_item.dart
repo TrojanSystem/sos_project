@@ -1,6 +1,7 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +9,8 @@ import 'house_detail.dart';
 import 'house_model.dart';
 
 class ListOfItems extends StatelessWidget {
-  const ListOfItems(
+  NumberFormat numberGrouper = NumberFormat.decimalPattern('en_us');
+  ListOfItems(
       {Key key,
       @required double w,
       @required this.columnCountForMain,
@@ -63,24 +65,27 @@ class ListOfItems extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             Navigator.push(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.fade,
-                                    child: HouseDetail(
-                                      houseIndex: index,
-                                      houseID: listOfHouse[index].id,
-                                      image: listOfHouse[index]['image'],
-                                      description: listOfHouse[index]
-                                          ['description'],
-                                      title: listOfHouse[index]['title'],
-                                      isFavorite: listOfHouse[index]
-                                          ['isFavorite'],
-                                      location: listOfHouse[index]['location'],
-                                      price: listOfHouse[index]['price'],
-                                      type: listOfHouse[index]['type'],
-                                      area: listOfHouse[index]['area'],
-                                      facility: listOfHouse[index]['facility'],
-                                    )));
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.fade,
+                                child: HouseDetail(
+                                  houseIndex: index,
+                                  houseID: listOfHouse[index].id,
+                                  image: listOfHouse[index]['image'],
+                                  description: listOfHouse[index]
+                                      ['description'],
+                                  title: listOfHouse[index]['title'],
+                                  isFavorite: listOfHouse[index]['isFavorite'],
+                                  location: listOfHouse[index]['location'],
+                                  price: numberGrouper
+                                      .format(listOfHouse[index]['price'])
+                                      .toString(),
+                                  type: listOfHouse[index]['type'],
+                                  area: listOfHouse[index]['area'],
+                                  facility: listOfHouse[index]['facility'],
+                                ),
+                              ),
+                            );
                           },
                           child: Container(
                             margin: EdgeInsets.only(

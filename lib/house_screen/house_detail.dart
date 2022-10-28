@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
 
 import '../collection_methods.dart';
+
+final _auth = FirebaseAuth.instance;
 
 class HouseDetail extends StatefulWidget {
   HouseDetail(
@@ -494,6 +497,18 @@ class _HouseDetailState extends State<HouseDetail> {
                           .collection('HomeDetail')
                           .doc(widget.houseID)
                           .update({
+                        'image': widget.image,
+                        'description': widget.description,
+                        'title': widget.title,
+                        'area': widget.area,
+                        'facility': widget.facility,
+                        'type': widget.type,
+                        'price': widget.price,
+                        'location': widget.location,
+                        'isFavorite': !widget.isFavorite,
+                      });
+                      FirebaseFirestore.instance.collection('Favorite').add({
+                        'loggedUserID': _auth.currentUser.uid,
                         'image': widget.image,
                         'description': widget.description,
                         'title': widget.title,

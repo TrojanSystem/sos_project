@@ -79,7 +79,7 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                   imageUrl:
                       "https://www.dreamgrow.com/wp-content/uploads/2018/11/brokerspic.jpg",
                   placeholder: (context, url) => Image.network(
-                    'https://images.unsplash.com/photo-1585144860106-998ca0f2922a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=604&q=80',
+                    'https://images.unsplash.com/photo-1423666639041-f56000c27a9a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80',
                     fit: BoxFit.fill,
                   ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -254,15 +254,62 @@ class _LoginState extends State<Login> with TickerProviderStateMixin {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          try {
-                            if (_loginFormKey.currentState.validate()) {
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (ctx) => const HomePage(),
-                                ),
-                              );
+                          if (_loginFormKey.currentState.validate()) {
+                            _loginFormKey.currentState.save();
+                            setState(() {
+                              _isLoading = true;
+                            });
+                            try {
+                              _emailTextController.clear();
+
+                              _passTextController.clear();
+
+                              final user =
+                                  await _auth.signInWithEmailAndPassword(
+                                      email: userEmail, password: userPassword);
+                              if (user != null) {
+                                setState(() {
+                                  _isLoading = false;
+                                });
+
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (ctx) => const HomePage(),
+                                  ),
+                                );
+                                setState(() {
+                                  Provider.of<DataProvider>(context,
+                                          listen: false)
+                                      .checker(_auth.currentUser.email);
+                                });
+                              }
+                            } catch (e) {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text(
+                                        'Error Occurred',
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.w900),
+                                      ),
+                                      content: Text(e.toString(),
+                                          overflow: TextOverflow.visible),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop(true);
+                                            },
+                                            child: const Text('Ok'))
+                                      ],
+                                    );
+                                  });
+                              setState(() {
+                                _isLoading = false;
+                              });
                             }
-                          } catch (e) {}
+                          }
                         },
                         child: Container(
                           margin: const EdgeInsets.fromLTRB(50, 10, 50, 0),
