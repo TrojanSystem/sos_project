@@ -8,15 +8,17 @@ import 'house_detail.dart';
 import 'house_model.dart';
 
 class ListOfItems extends StatelessWidget {
-  const ListOfItems({
-    Key key,
-    @required double w,
-    @required this.columnCountForMain,
-    @required this.columnCount,
-  })  : _w = w,
+  const ListOfItems(
+      {Key key,
+      @required double w,
+      @required this.columnCountForMain,
+      @required this.columnCount,
+      @required this.listOfHouse})
+      : _w = w,
         super(key: key);
 
   final double _w;
+  final List listOfHouse;
   final int columnCountForMain;
   final int columnCount;
 
@@ -48,7 +50,7 @@ class ListOfItems extends StatelessWidget {
               padding: EdgeInsets.all(_w / 60),
               crossAxisCount: columnCountForMain,
               children: List.generate(
-                houseData.houseList.length,
+                listOfHouse.length,
                 (int index) {
                   return AnimationConfiguration.staggeredGrid(
                     position: index,
@@ -65,19 +67,19 @@ class ListOfItems extends StatelessWidget {
                                 PageTransition(
                                     type: PageTransitionType.fade,
                                     child: HouseDetail(
-                                      image: houseData.houseList[index].image,
-                                      description: houseData
-                                          .houseList[index].description,
-                                      title: houseData.houseList[index].title,
-                                      isFavorite:
-                                          houseData.houseList[index].isFavorite,
-                                      location:
-                                          houseData.houseList[index].location,
-                                      price: houseData.houseList[index].price,
-                                      type: houseData.houseList[index].type,
-                                      area: houseData.houseList[index].area,
-                                      facility:
-                                          houseData.houseList[index].facility,
+                                      houseIndex: index,
+                                      houseID: listOfHouse[index].id,
+                                      image: listOfHouse[index]['image'],
+                                      description: listOfHouse[index]
+                                          ['description'],
+                                      title: listOfHouse[index]['title'],
+                                      isFavorite: listOfHouse[index]
+                                          ['isFavorite'],
+                                      location: listOfHouse[index]['location'],
+                                      price: listOfHouse[index]['price'],
+                                      type: listOfHouse[index]['type'],
+                                      area: listOfHouse[index]['area'],
+                                      facility: listOfHouse[index]['facility'],
                                     )));
                           },
                           child: Container(
