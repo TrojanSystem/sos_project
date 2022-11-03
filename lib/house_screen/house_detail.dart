@@ -1,12 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../collection_methods.dart';
+import '../crediential/data_provider.dart';
 
 final _auth = FirebaseAuth.instance;
+NumberFormat numberGrouper = NumberFormat.decimalPattern('en_us');
+var loggedInUser;
 
 class HouseDetail extends StatefulWidget {
   HouseDetail(
@@ -16,6 +21,8 @@ class HouseDetail extends StatefulWidget {
       @required this.location,
       @required this.isFavorite,
       @required this.facility,
+      @required this.itemID,
+      @required this.itemType,
       @required this.area,
       @required this.title,
       @required this.houseIndex,
@@ -25,6 +32,8 @@ class HouseDetail extends StatefulWidget {
   int houseIndex;
   String houseID;
   String description;
+  String itemType;
+  String itemID;
   String area;
   String type;
   String price;
@@ -38,9 +47,29 @@ class HouseDetail extends StatefulWidget {
 
 class _HouseDetailState extends State<HouseDetail> {
   bool _onClick = false;
+  @override
+  void initState() {
+    getCurrentUser();
+    super.initState();
+    Firebase.initializeApp().whenComplete(() {
+      setState(() {});
+    });
+  }
 
+  void getCurrentUser() async {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user.uid;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  bool _isLiked = false;
   String dateTime = DateTime.now().toString();
-
+  String currentUserID;
   void datePicker() {
     showDatePicker(
       context: context,
@@ -64,6 +93,7 @@ class _HouseDetailState extends State<HouseDetail> {
   Widget build(BuildContext context) {
     double _w = MediaQuery.of(context).size.width;
     int columnCount = 1;
+
     return Scaffold(
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('HomeDetail').snapshots(),
@@ -73,8 +103,24 @@ class _HouseDetailState extends State<HouseDetail> {
               child: Text('Loading...'),
             );
           }
-          final detailSnapData = detailSnap.data.docs;
+          final userFavItems =
+              Provider.of<DataProvider>(context).registeredMembers;
 
+          for (var message in userFavItems) {
+            if (message['userID'] == loggedInUser) {
+              currentUserID = message['userID'];
+            }
+          }
+          final userFavoriteLists =
+              Provider.of<DataProvider>(context).registeredUserFavoriteItems;
+          final detailSnapData = detailSnap.data.docs;
+          for (var message in userFavoriteLists) {
+            if (message['userID'] == loggedInUser &&
+                detailSnapData[widget.houseIndex]['itemID'] ==
+                    message['itemID']) {
+              _isLiked = message['isFavorite'];
+            }
+          }
           return Stack(
             children: [
               Container(
@@ -485,39 +531,31 @@ class _HouseDetailState extends State<HouseDetail> {
                   child: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Icon(
-                      detailSnapData[widget.houseIndex]['isFavorite']
-                          ? Icons.favorite
-                          : Icons.favorite_border,
+                      _isLiked ? Icons.favorite : Icons.favorite_border,
                       color: Colors.pink[800],
                     ),
                   ),
                   onPressed: () async {
                     setState(() {
+                      final houseID =
+                          Provider.of<DataProvider>(context, listen: false)
+                              .houseV4Crypto;
                       FirebaseFirestore.instance
-                          .collection('HomeDetail')
-                          .doc(widget.houseID)
-                          .update({
+                          .collection('Favorite')
+                          .doc(detailSnapData[widget.houseIndex]['itemID'])
+                          .set({
+                        'userID': currentUserID,
                         'image': widget.image,
+                        'itemType': widget.itemType,
+                        'itemID': widget.itemID,
                         'description': widget.description,
                         'title': widget.title,
                         'area': widget.area,
                         'facility': widget.facility,
                         'type': widget.type,
-                        'price': widget.price,
+                        'price': numberGrouper.parse((widget.price)),
                         'location': widget.location,
-                        'isFavorite': !widget.isFavorite,
-                      });
-                      FirebaseFirestore.instance.collection('Favorite').add({
-                        'loggedUserID': _auth.currentUser.uid,
-                        'image': widget.image,
-                        'description': widget.description,
-                        'title': widget.title,
-                        'area': widget.area,
-                        'facility': widget.facility,
-                        'type': widget.type,
-                        'price': widget.price,
-                        'location': widget.location,
-                        'isFavorite': !widget.isFavorite,
+                        'isFavorite': !_isLiked,
                       });
                     });
                   },

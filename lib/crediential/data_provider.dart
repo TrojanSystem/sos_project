@@ -1,18 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+import 'package:uuid/uuid_util.dart';
 
 class DataProvider extends ChangeNotifier {
-  final List<Map<String, dynamic>> carDetailData = [];
-  String loggedUserEmail = '';
+  var uuid = const Uuid();
+  var houseV4Crypto;
+  var carV4Crypto;
+  final List<Map<String, dynamic>> registeredMembers = [];
+  String userID = '';
   String totalSoldIncome = '';
   String totalExpectedIncome = '';
   String totalAppbarSoldIncome = '';
   String totalAppbarExpectedIncome = '';
 
-  final List<Map<String, dynamic>> homeDetailData = [];
+  final List<Map<String, dynamic>> registeredUserFavoriteItems = [];
+  final List<Map<String, dynamic>> favoriteCarData = [];
+  final List<Map<String, dynamic>> carData = [];
 
   checker(String userEmail) {
-    loggedUserEmail = userEmail;
+    houseV4Crypto = uuid.v4(options: {'rng': UuidUtil.cryptoRNG});
+    notifyListeners();
+  }
+
+  assigner(String userEmail) {
+    carV4Crypto = uuid.v4(options: {'rng': UuidUtil.cryptoRNG});
     notifyListeners();
   }
 
@@ -31,10 +43,34 @@ class DataProvider extends ChangeNotifier {
   void loadHomeDetailDataList() async {
     notifyListeners();
     await for (var y
-        in FirebaseFirestore.instance.collection('HomeDetail').snapshots()) {
+        in FirebaseFirestore.instance.collection('Favorite').snapshots()) {
       for (var snapSell in y.docs) {
-        // notifyListeners();
-        homeDetailData.add(snapSell.data());
+        notifyListeners();
+        registeredUserFavoriteItems.add(snapSell.data());
+      }
+    }
+    notifyListeners();
+  }
+
+  void loadCarDataList() async {
+    notifyListeners();
+    await for (var y
+        in FirebaseFirestore.instance.collection('CarModel').snapshots()) {
+      for (var snapSell in y.docs) {
+        notifyListeners();
+        carData.add(snapSell.data());
+      }
+    }
+    notifyListeners();
+  }
+
+  void loadFavoriteCarDataList() async {
+    notifyListeners();
+    await for (var y
+        in FirebaseFirestore.instance.collection('FavoriteCar').snapshots()) {
+      for (var snapSell in y.docs) {
+        notifyListeners();
+        favoriteCarData.add(snapSell.data());
       }
     }
     notifyListeners();
@@ -43,10 +79,10 @@ class DataProvider extends ChangeNotifier {
   void loadCarDetailDataList() async {
     notifyListeners();
     await for (var y
-        in FirebaseFirestore.instance.collection('CarModel').snapshots()) {
+        in FirebaseFirestore.instance.collection('Members').snapshots()) {
       for (var snapSell in y.docs) {
         notifyListeners();
-        carDetailData.add(snapSell.data());
+        registeredMembers.add(snapSell.data());
       }
     }
     notifyListeners();

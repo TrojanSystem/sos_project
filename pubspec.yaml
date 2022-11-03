@@ -70,10 +70,11 @@ dependencies:
   flutter_local_notifications:
   overlay_support: ^1.2.1
   image_cropper: ^1.4.1
-
+  uuid: 3.0.6
   firebase_messaging:
   firebase_analytics: ^9.3.8
   webview_flutter: ^3.0.4
+  flutter_bloc: ^8.1.1
 
 dev_dependencies:
   flutter_test:

@@ -8,11 +8,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
 import '../crediential/login.dart';
 import '../home_page.dart';
-import 'data_provider.dart';
 
 bool _isRegistering = false;
 
@@ -34,7 +33,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
       TextEditingController(text: '');
   final TextEditingController _passTextController =
       TextEditingController(text: '');
-
+  var uuid = const Uuid();
   final TextEditingController _phoneNumberController =
       TextEditingController(text: '');
   String imageUrl = '';
@@ -423,9 +422,16 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                                 setState(() {
                                   _isRegistering = false;
                                 });
+
+                                // Generate a v4 (crypto-random) id
+
+                                User user = _auth.currentUser;
+                                final loggedUserID = user.uid;
                                 FirebaseFirestore.instance
                                     .collection('Members')
-                                    .add({
+                                    .doc(loggedUserID)
+                                    .set({
+                                  'userID': loggedUserID,
                                   'userFullName': userFullName,
                                   'userEmail': userEmail,
                                   'userPhoneNumber': userPhone,
@@ -437,11 +443,6 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
                                     builder: (ctx) => const HomePage(),
                                   ),
                                 );
-                                setState(() {
-                                  Provider.of<DataProvider>(context,
-                                          listen: false)
-                                      .checker(_auth.currentUser.email);
-                                });
                               }
                             } catch (e) {
                               showDialog(
@@ -600,9 +601,7 @@ class _SignUpState extends State<SignUp> with TickerProviderStateMixin {
       UploadTask uploadTask = ref.putFile(file);
       uploadTask.whenComplete(() async {
         imageUrl = await ref.getDownloadURL();
-      }).catchError((onError) {
-        print(onError);
-      });
+      }).catchError((onError) {});
     } else {
       print('No Image Path Received');
     }

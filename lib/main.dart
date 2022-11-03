@@ -33,6 +33,8 @@ class SOSProject extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => DataProvider()
             ..loadCarDetailDataList()
+            ..loadFavoriteCarDataList()
+            ..loadCarDataList()
             ..loadHomeDetailDataList(),
         ),
       ],

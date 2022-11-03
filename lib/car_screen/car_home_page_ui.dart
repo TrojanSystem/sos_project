@@ -1,4 +1,3 @@
-import 'package:ada_bread/car_screen/car_model.dart';
 import 'package:flutter/material.dart';
 
 import 'list_of_available_car.dart';
@@ -11,7 +10,7 @@ class CarBrandsList extends StatelessWidget {
   }) : super(key: key);
 
   final List<String> carBrand;
-  final List<CarModel> carList;
+  var carList;
   List<String> carBrands = [
     'Tesla',
     'Honda',
@@ -43,12 +42,11 @@ class CarBrandsList extends StatelessWidget {
           child: ListView.builder(
             itemBuilder: (context, index) {
               final carBrandList = carList
-                  .where((element) => element.type == carBrands[index])
+                  .where((element) => element['type'] == carBrands[index])
                   .toList();
 
               return GestureDetector(
                 onTap: () {
-                  print(carBrands[index]);
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (ctx) =>
                           ListOfAvailableCars(carType: carBrandList)));

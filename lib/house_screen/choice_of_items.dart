@@ -29,7 +29,7 @@ class ChoiceOfItems extends StatelessWidget {
     return Expanded(
       flex: 1,
       child: Container(
-        margin: EdgeInsets.only(top: 10),
+        margin: const EdgeInsets.only(top: 10),
         padding: const EdgeInsets.all(0.0),
         child: AnimatedContainer(
           decoration: BoxDecoration(
