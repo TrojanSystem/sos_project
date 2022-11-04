@@ -388,9 +388,8 @@ class _CarHomeScreenState extends State<CarHomeScreen> {
                                                                           .instance
                                                                           .collection(
                                                                               'Favorite')
-                                                                          .doc(carData[index]
-                                                                              [
-                                                                              'itemID'])
+                                                                          .doc(carData[index]['itemID'] +
+                                                                              carData[index]['userID'])
                                                                           .set({
                                                                         'userID':
                                                                             currentUserID,

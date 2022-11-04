@@ -75,9 +75,7 @@ class ListOfItems extends StatelessWidget {
                                 title: listOfHouse[index]['title'],
                                 isFavorite: listOfHouse[index]['isFavorite'],
                                 location: listOfHouse[index]['location'],
-                                price: numberGrouper
-                                    .format(listOfHouse[index]['price'])
-                                    .toString(),
+                                price: listOfHouse[index]['price'],
                                 type: listOfHouse[index]['type'],
                                 area: listOfHouse[index]['area'],
                                 facility: listOfHouse[index]['facility'],

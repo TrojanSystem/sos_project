@@ -309,12 +309,14 @@ class _ListOfAvailableCarsState extends State<ListOfAvailableCars> {
                                                                 .instance
                                                                 .collection(
                                                                     'Favorite')
-                                                                .doc(
-                                                                  widget.carType[
-                                                                          index]
-                                                                      [
-                                                                      'itemID'],
-                                                                )
+                                                                .doc(widget.carType[
+                                                                            index]
+                                                                        [
+                                                                        'itemID'] +
+                                                                    widget.carType[
+                                                                            index]
+                                                                        [
+                                                                        'userID'])
                                                                 .set({
                                                               'userID':
                                                                   currentUserID,

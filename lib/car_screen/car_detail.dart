@@ -529,7 +529,8 @@ class _CarDetailState extends State<CarDetail> {
                           setState(() {
                             FirebaseFirestore.instance
                                 .collection('Favorite')
-                                .doc(carListDetail[widget.index]['itemID'])
+                                .doc(carListDetail[widget.index]['itemID'] +
+                                    carListDetail[widget.index]['userID'])
                                 .set({
                               'userID': currentUserID,
                               'type': carListDetail[widget.index]['type'],

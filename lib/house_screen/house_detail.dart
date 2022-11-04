@@ -542,7 +542,8 @@ class _HouseDetailState extends State<HouseDetail> {
                               .houseV4Crypto;
                       FirebaseFirestore.instance
                           .collection('Favorite')
-                          .doc(detailSnapData[widget.houseIndex]['itemID'])
+                          .doc(detailSnapData[widget.houseIndex]['itemID'] +
+                              detailSnapData[widget.houseIndex]['userID'])
                           .set({
                         'userID': currentUserID,
                         'image': widget.image,
@@ -553,7 +554,7 @@ class _HouseDetailState extends State<HouseDetail> {
                         'area': widget.area,
                         'facility': widget.facility,
                         'type': widget.type,
-                        'price': numberGrouper.parse((widget.price)),
+                        'price': widget.price,
                         'location': widget.location,
                         'isFavorite': !_isLiked,
                       });
