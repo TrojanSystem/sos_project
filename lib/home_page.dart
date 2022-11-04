@@ -1,5 +1,6 @@
 import 'package:ada_bread/car_screen/car_home_page.dart';
 import 'package:ada_bread/house_screen/house_screen.dart';
+import 'package:ada_bread/tender_screen/tender_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +63,7 @@ class HomePage extends StatelessWidget {
           children: [
             HouseScreen(),
             CarHomeScreen(),
-            NewsScreen(),
+            TenderScreen(),
             NewsScreen(),
           ],
         ),

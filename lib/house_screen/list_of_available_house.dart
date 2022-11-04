@@ -190,11 +190,10 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                             ),
                                             Row(
                                               children: [
-                                                const Icon(Icons
-                                                    .location_on_outlined),
+                                                const Icon(
+                                                    Icons.location_on_outlined),
                                                 Text(
-                                                  typeFilter[index]
-                                                      ['location'],
+                                                  typeFilter[index]['location'],
                                                   style: const TextStyle(
                                                       fontSize: 15),
                                                 ),
@@ -223,8 +222,7 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                                 MaterialButton(
                                                   color: Colors.blue[800],
                                                   elevation: 20,
-                                                  shape:
-                                                      RoundedRectangleBorder(
+                                                  shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
@@ -233,49 +231,48 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                                             Colors.blue[800]),
                                                   ),
                                                   onPressed: () {
-                                                    Navigator.of(context)
-                                                        .push(
+                                                    Navigator.of(context).push(
                                                       MaterialPageRoute(
                                                         builder: (ctx) =>
                                                             HouseDetail(
                                                           houseID:
                                                               currentUserID,
                                                           houseIndex: index,
-                                                          itemID: typeFilter[
-                                                                  index]
-                                                              ['itemID'],
+                                                          itemID:
+                                                              typeFilter[index]
+                                                                  ['itemID'],
                                                           itemType:
-                                                              typeFilter[
-                                                                      index][
-                                                                  'itemType'],
-                                                          image: typeFilter[
-                                                              index]['image'],
+                                                              typeFilter[index]
+                                                                  ['itemType'],
+                                                          image:
+                                                              typeFilter[index]
+                                                                  ['image'],
                                                           description:
-                                                              typeFilter[
-                                                                      index][
+                                                              typeFilter[index][
                                                                   'description'],
-                                                          title: typeFilter[
-                                                              index]['title'],
-                                                          area: typeFilter[
-                                                              index]['area'],
+                                                          title:
+                                                              typeFilter[index]
+                                                                  ['title'],
+                                                          area:
+                                                              typeFilter[index]
+                                                                  ['area'],
                                                           facility:
-                                                              typeFilter[
-                                                                      index][
-                                                                  'facility'],
-                                                          type: typeFilter[
-                                                              index]['type'],
+                                                              typeFilter[index]
+                                                                  ['facility'],
+                                                          type:
+                                                              typeFilter[index]
+                                                                  ['type'],
                                                           price: numberFormat
-                                                              .format(typeFilter[
-                                                                      index]
-                                                                  ['price'])
+                                                              .format(
+                                                                  typeFilter[
+                                                                          index]
+                                                                      ['price'])
                                                               .toString(),
                                                           location:
-                                                              typeFilter[
-                                                                      index][
-                                                                  'location'],
+                                                              typeFilter[index]
+                                                                  ['location'],
                                                           isFavorite:
-                                                              typeFilter[
-                                                                      index][
+                                                              typeFilter[index][
                                                                   'isFavorite'],
                                                         ),
                                                       ),
@@ -305,25 +302,15 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                                   ),
                                                   onPressed: () async {
                                                     setState(() {
-                                                      final houseID = Provider
-                                                              .of<DataProvider>(
-                                                                  context,
-                                                                  listen:
-                                                                      false)
-                                                          .houseV4Crypto;
-                                                      FirebaseFirestore
-                                                          .instance
+                                                      FirebaseFirestore.instance
                                                           .collection(
                                                               'Favorite')
-                                                          .doc(typeFilter[
-                                                                      index]
+                                                          .doc(typeFilter[index]
                                                                   ['itemID'] +
-                                                              typeFilter[
-                                                                      index]
+                                                              typeFilter[index]
                                                                   ['userID'])
                                                           .set({
-                                                        'userID':
-                                                            currentUserID,
+                                                        'userID': currentUserID,
                                                         'itemID':
                                                             typeFilter[index]
                                                                 ['itemID'],
@@ -334,8 +321,8 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                                             typeFilter[index]
                                                                 ['image'],
                                                         'description':
-                                                            typeFilter[index][
-                                                                'description'],
+                                                            typeFilter[index]
+                                                                ['description'],
                                                         'title':
                                                             typeFilter[index]
                                                                 ['title'],
@@ -354,8 +341,7 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                                         'location':
                                                             typeFilter[index]
                                                                 ['location'],
-                                                        'isFavorite':
-                                                            !_isLiked,
+                                                        'isFavorite': !_isLiked,
                                                       });
                                                     });
                                                   },
