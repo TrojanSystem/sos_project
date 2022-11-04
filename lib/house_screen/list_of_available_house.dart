@@ -153,225 +153,222 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                     ),
                                   ],
                                 ),
-                                child: GestureDetector(
-                                  onTap: () {},
-                                  child: Container(
-                                    height: _w * 0.35,
-                                    color: Colors.white,
-                                    margin: const EdgeInsets.all(8),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: ClipRRect(
-                                            child: Image.asset(
-                                              typeFilter[index]['image'],
-                                              fit: BoxFit.contain,
+                                child: Container(
+                                  height: _w * 0.35,
+                                  color: Colors.white,
+                                  margin: const EdgeInsets.all(8),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: ClipRRect(
+                                          child: Image.asset(
+                                            typeFilter[index]['image'],
+                                            fit: BoxFit.contain,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          clipBehavior: Clip.antiAlias,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              typeFilter[index]['title'],
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.w900,
+                                                  fontSize: 20),
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            clipBehavior: Clip.antiAlias,
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                typeFilter[index]['title'],
-                                                style: const TextStyle(
-                                                    fontWeight: FontWeight.w900,
-                                                    fontSize: 20),
-                                              ),
-                                              Row(
-                                                children: [
-                                                  const Icon(Icons
-                                                      .location_on_outlined),
-                                                  Text(
-                                                    typeFilter[index]
-                                                        ['location'],
-                                                    style: const TextStyle(
-                                                        fontSize: 15),
+                                            Row(
+                                              children: [
+                                                const Icon(Icons
+                                                    .location_on_outlined),
+                                                Text(
+                                                  typeFilter[index]
+                                                      ['location'],
+                                                  style: const TextStyle(
+                                                      fontSize: 15),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: const [
+                                                Icon(
+                                                  Icons.star_rate_rounded,
+                                                  color: Colors.amber,
+                                                ),
+                                                Text(
+                                                  '4.5 ',
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                                Text(
+                                                  ' (485 Reviews)',
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                )
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                MaterialButton(
+                                                  color: Colors.blue[800],
+                                                  elevation: 20,
+                                                  shape:
+                                                      RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    side: BorderSide(
+                                                        color:
+                                                            Colors.blue[800]),
                                                   ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: const [
-                                                  Icon(
-                                                    Icons.star_rate_rounded,
-                                                    color: Colors.amber,
-                                                  ),
-                                                  Text(
-                                                    '4.5 ',
-                                                    style:
-                                                        TextStyle(fontSize: 18),
-                                                  ),
-                                                  Text(
-                                                    ' (485 Reviews)',
-                                                    style:
-                                                        TextStyle(fontSize: 18),
-                                                  )
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  MaterialButton(
-                                                    color: Colors.blue[800],
-                                                    elevation: 20,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      side: BorderSide(
-                                                          color:
-                                                              Colors.blue[800]),
-                                                    ),
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .push(
-                                                        MaterialPageRoute(
-                                                          builder: (ctx) =>
-                                                              HouseDetail(
-                                                            houseID:
-                                                                currentUserID,
-                                                            houseIndex: index,
-                                                            itemID: typeFilter[
-                                                                    index]
-                                                                ['itemID'],
-                                                            itemType:
-                                                                typeFilter[
-                                                                        index][
-                                                                    'itemType'],
-                                                            image: typeFilter[
-                                                                index]['image'],
-                                                            description:
-                                                                typeFilter[
-                                                                        index][
-                                                                    'description'],
-                                                            title: typeFilter[
-                                                                index]['title'],
-                                                            area: typeFilter[
-                                                                index]['area'],
-                                                            facility:
-                                                                typeFilter[
-                                                                        index][
-                                                                    'facility'],
-                                                            type: typeFilter[
-                                                                index]['type'],
-                                                            price: numberFormat
-                                                                .format(typeFilter[
-                                                                        index]
-                                                                    ['price'])
-                                                                .toString(),
-                                                            location:
-                                                                typeFilter[
-                                                                        index][
-                                                                    'location'],
-                                                            isFavorite:
-                                                                typeFilter[
-                                                                        index][
-                                                                    'isFavorite'],
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                    child: const Text(
-                                                      'Detail',
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    ),
-                                                  ),
-                                                  MaterialButton(
-                                                    shape: const CircleBorder(),
-                                                    elevation: 15,
-                                                    color: Colors.white,
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              15.0),
-                                                      child: Icon(
-                                                        _isLiked
-                                                            ? Icons.favorite
-                                                            : Icons
-                                                                .favorite_border,
-                                                        color: Colors.pink[800],
-                                                      ),
-                                                    ),
-                                                    onPressed: () async {
-                                                      setState(() {
-                                                        final houseID = Provider
-                                                                .of<DataProvider>(
-                                                                    context,
-                                                                    listen:
-                                                                        false)
-                                                            .houseV4Crypto;
-                                                        FirebaseFirestore
-                                                            .instance
-                                                            .collection(
-                                                                'Favorite')
-                                                            .doc(typeFilter[
-                                                                        index]
-                                                                    ['itemID'] +
-                                                                typeFilter[
-                                                                        index]
-                                                                    ['userID'])
-                                                            .set({
-                                                          'userID':
+                                                  onPressed: () {
+                                                    Navigator.of(context)
+                                                        .push(
+                                                      MaterialPageRoute(
+                                                        builder: (ctx) =>
+                                                            HouseDetail(
+                                                          houseID:
                                                               currentUserID,
-                                                          'itemID':
-                                                              typeFilter[index]
-                                                                  ['itemID'],
-                                                          'itemType':
-                                                              typeFilter[index]
-                                                                  ['itemType'],
-                                                          'image':
-                                                              typeFilter[index]
-                                                                  ['image'],
-                                                          'description':
-                                                              typeFilter[index][
+                                                          houseIndex: index,
+                                                          itemID: typeFilter[
+                                                                  index]
+                                                              ['itemID'],
+                                                          itemType:
+                                                              typeFilter[
+                                                                      index][
+                                                                  'itemType'],
+                                                          image: typeFilter[
+                                                              index]['image'],
+                                                          description:
+                                                              typeFilter[
+                                                                      index][
                                                                   'description'],
-                                                          'title':
-                                                              typeFilter[index]
-                                                                  ['title'],
-                                                          'area':
-                                                              typeFilter[index]
-                                                                  ['area'],
-                                                          'facility':
-                                                              typeFilter[index]
-                                                                  ['facility'],
-                                                          'type':
-                                                              typeFilter[index]
-                                                                  ['type'],
-                                                          'price':
-                                                              typeFilter[index]
-                                                                  ['price'],
-                                                          'location':
-                                                              typeFilter[index]
-                                                                  ['location'],
-                                                          'isFavorite':
-                                                              !_isLiked,
-                                                        });
-                                                      });
-                                                    },
+                                                          title: typeFilter[
+                                                              index]['title'],
+                                                          area: typeFilter[
+                                                              index]['area'],
+                                                          facility:
+                                                              typeFilter[
+                                                                      index][
+                                                                  'facility'],
+                                                          type: typeFilter[
+                                                              index]['type'],
+                                                          price: numberFormat
+                                                              .format(typeFilter[
+                                                                      index]
+                                                                  ['price'])
+                                                              .toString(),
+                                                          location:
+                                                              typeFilter[
+                                                                      index][
+                                                                  'location'],
+                                                          isFavorite:
+                                                              typeFilter[
+                                                                      index][
+                                                                  'isFavorite'],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: const Text(
+                                                    'Detail',
+                                                    style: TextStyle(
+                                                        color: Colors.white),
                                                   ),
-                                                ],
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                              )
-                                            ],
-                                          ),
+                                                ),
+                                                MaterialButton(
+                                                  shape: const CircleBorder(),
+                                                  elevation: 15,
+                                                  color: Colors.white,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            15.0),
+                                                    child: Icon(
+                                                      _isLiked
+                                                          ? Icons.favorite
+                                                          : Icons
+                                                              .favorite_border,
+                                                      color: Colors.pink[800],
+                                                    ),
+                                                  ),
+                                                  onPressed: () async {
+                                                    setState(() {
+                                                      final houseID = Provider
+                                                              .of<DataProvider>(
+                                                                  context,
+                                                                  listen:
+                                                                      false)
+                                                          .houseV4Crypto;
+                                                      FirebaseFirestore
+                                                          .instance
+                                                          .collection(
+                                                              'Favorite')
+                                                          .doc(typeFilter[
+                                                                      index]
+                                                                  ['itemID'] +
+                                                              typeFilter[
+                                                                      index]
+                                                                  ['userID'])
+                                                          .set({
+                                                        'userID':
+                                                            currentUserID,
+                                                        'itemID':
+                                                            typeFilter[index]
+                                                                ['itemID'],
+                                                        'itemType':
+                                                            typeFilter[index]
+                                                                ['itemType'],
+                                                        'image':
+                                                            typeFilter[index]
+                                                                ['image'],
+                                                        'description':
+                                                            typeFilter[index][
+                                                                'description'],
+                                                        'title':
+                                                            typeFilter[index]
+                                                                ['title'],
+                                                        'area':
+                                                            typeFilter[index]
+                                                                ['area'],
+                                                        'facility':
+                                                            typeFilter[index]
+                                                                ['facility'],
+                                                        'type':
+                                                            typeFilter[index]
+                                                                ['type'],
+                                                        'price':
+                                                            typeFilter[index]
+                                                                ['price'],
+                                                        'location':
+                                                            typeFilter[index]
+                                                                ['location'],
+                                                        'isFavorite':
+                                                            !_isLiked,
+                                                      });
+                                                    });
+                                                  },
+                                                ),
+                                              ],
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                            )
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
