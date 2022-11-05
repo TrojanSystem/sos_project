@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../car_screen/car_detail.dart';
 import '../crediential/data_provider.dart';
 import '../house_screen/house_detail.dart';
+import '../news_screen/news_detail.dart';
 
 final _auth = FirebaseAuth.instance;
 var loggedInUser;
@@ -79,62 +80,217 @@ class _BookmarkedItemsState extends State<BookmarkedItems> {
         centerTitle: true,
       ),
       body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('Favorite').snapshots(),
-          builder: (context, bookmark) {
-            if (!bookmark.hasData) {
-              return const CircularProgressIndicator();
+        stream: FirebaseFirestore.instance.collection('Favorite').snapshots(),
+        builder: (context, bookmark) {
+          if (!bookmark.hasData) {
+            return const CircularProgressIndicator();
+          }
+          final userFavItems =
+              Provider.of<DataProvider>(context).registeredMembers;
+          final userFavoriteList =
+              Provider.of<DataProvider>(context).registeredUserFavoriteItems;
+          for (var message in userFavItems) {
+            if (message['userID'] == loggedInUser) {
+              currentUserID = message['userID'];
             }
-            final userFavItems =
-                Provider.of<DataProvider>(context).registeredMembers;
-            final userFavoriteList =
-                Provider.of<DataProvider>(context).registeredUserFavoriteItems;
-            for (var message in userFavItems) {
-              if (message['userID'] == loggedInUser) {
-                currentUserID = message['userID'];
-              }
-            }
-            final booked = bookmark.data.docs;
-            final checker = booked
-                .where((element) => element['userID'] == loggedInUser)
-                .toList();
-            final bookmarked = checker
-                .where((element) => element['isFavorite'] == true)
-                .toList();
-            return bookmarked.isEmpty
-                ? Center(
-                    child: Column(
-                      children: [
-                        Image.asset('images/bookmark.png'),
-                        const Text('browse more')
-                      ],
-                    ),
-                  )
-                : AnimationLimiter(
-                    child: ListView.builder(
-                        itemCount: bookmarked.length,
-                        physics: const BouncingScrollPhysics(
-                            parent: AlwaysScrollableScrollPhysics()),
-                        padding: EdgeInsets.all(_w / 120),
-                        itemBuilder: (context, index) {
-                          for (var message in userFavoriteList) {
-                            if (message['userID'] == loggedInUser &&
-                                bookmarked[index]['itemID'] ==
-                                    message['itemID']) {
-                              _isLiked = message['isFavorite'];
-                            }
-                          }
-                          return currentUserID == loggedInUser
-                              ? bookmarked[index]['itemType'] == 'house'
-                                  ? bookMarkedHouseList(
-                                      index, _w, bookmarked, context)
+          }
+          final booked = bookmark.data.docs;
+          final checker = booked
+              .where((element) => element['userID'] == loggedInUser)
+              .toList();
+          final bookmarked = checker
+              .where((element) => element['isFavorite'] == true)
+              .toList();
+          return bookmarked.isEmpty
+              ? Center(
+                  child: Column(
+                    children: [
+                      Image.asset('images/bookmark.png'),
+                      const Text('browse more')
+                    ],
+                  ),
+                )
+              : AnimationLimiter(
+                  child: ListView.builder(
+                    itemCount: bookmarked.length,
+                    physics: const BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics()),
+                    padding: EdgeInsets.all(_w / 120),
+                    itemBuilder: (context, index) {
+                      for (var message in userFavoriteList) {
+                        if (message['userID'] == loggedInUser &&
+                            bookmarked[index]['itemID'] == message['itemID']) {
+                          _isLiked = message['isFavorite'];
+                        }
+                      }
+
+                      return currentUserID == loggedInUser
+                          ? bookmarked[index]['itemType'] == 'house'
+                              ? bookMarkedHouseList(
+                                  index, _w, bookmarked, context)
+                              : bookmarked[index]['itemType'] == 'tender'
+                                  ? bookMarkedTenderNewsList(
+                                      index, _w, bookmarked)
                                   : bookMarkedCarList(
                                       index, _w, bookmarked, context)
-                              : const Center(
-                                  child: Text('data'),
+                          : const Center(
+                              child: Text('data'),
+                            );
+                    },
+                  ),
+                );
+        },
+      ),
+    );
+  }
+
+  AnimationConfiguration bookMarkedTenderNewsList(
+      int index, double _w, List<QueryDocumentSnapshot<Object>> bookmarked) {
+    final gettyImage = bookmarked[index]['urlToImage'];
+    final tenderNewsImage = gettyImage.replaceAll('"', '');
+    return AnimationConfiguration.staggeredGrid(
+      position: index,
+      duration: const Duration(milliseconds: 500),
+      columnCount: 1,
+      child: ScaleAnimation(
+        duration: const Duration(milliseconds: 900),
+        curve: Curves.fastLinearToSlowEaseIn,
+        child: FadeInAnimation(
+          child: Container(
+            margin:
+                EdgeInsets.only(bottom: _w / 30, left: _w / 60, right: _w / 60),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 40,
+                  spreadRadius: 10,
+                ),
+              ],
+            ),
+            child: Container(
+              height: _w * 0.36,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 40,
+                    spreadRadius: 10,
+                  ),
+                ],
+              ),
+              margin: const EdgeInsets.all(8),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Image.network(
+                      tenderNewsImage,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          bookmarked[index]['title'],
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w900, fontSize: 20),
+                        ),
+                        Text(
+                          bookmarked[index]['author'],
+                          style: const TextStyle(fontSize: 15),
+                        ),
+                        Text(
+                          bookmarked[index]['content'],
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                        Row(
+                          children: [
+                            MaterialButton(
+                              color: Colors.blue[800],
+                              elevation: 20,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side: BorderSide(color: Colors.blue[800]),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (ctx) => NewsDetail(
+                                      blogUrl: bookmarked[index]['url'],
+                                    ),
+                                  ),
                                 );
-                        }),
-                  );
-          }),
+                              },
+                              child: const Text(
+                                'Detail',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            MaterialButton(
+                                shape: const CircleBorder(),
+                                elevation: 15,
+                                color: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Icon(
+                                    _isLiked
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    color: Colors.pink[800],
+                                  ),
+                                ),
+                                onPressed: () async {
+                                  setState(() {
+                                    FirebaseFirestore.instance
+                                        .collection('Favorite')
+                                        .doc(bookmarked[index]['itemID'] +
+                                            bookmarked[index]['userID'])
+                                        .set({
+                                      'type': 'tender',
+                                      'author': bookmarked[index]['author'],
+                                      'category': 'health',
+                                      'content': bookmarked[index]['content'],
+                                      'description': bookmarked[index]
+                                          ['description'],
+                                      'itemType': bookmarked[index]['itemType'],
+                                      'isFavorite': !_isLiked,
+                                      'itemID': bookmarked[index]['itemID'],
+                                      'publishedAt': bookmarked[index]
+                                          ['publishedAt'],
+                                      'title': bookmarked[index]['title'],
+                                      'url': bookmarked[index]['url'],
+                                      'urlToImage': bookmarked[index]
+                                          ['urlToImage'],
+                                      'userID': currentUserID,
+                                    });
+                                  });
+                                }),
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 
@@ -475,10 +631,6 @@ class _BookmarkedItemsState extends State<BookmarkedItems> {
                               ),
                               onPressed: () async {
                                 setState(() {
-                                  final houseID = Provider.of<DataProvider>(
-                                          context,
-                                          listen: false)
-                                      .houseV4Crypto;
                                   FirebaseFirestore.instance
                                       .collection('Favorite')
                                       .doc(bookmarked[index]['itemID'])

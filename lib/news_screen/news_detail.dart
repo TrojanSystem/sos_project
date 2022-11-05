@@ -30,7 +30,7 @@ class _NewsDetailState extends State<NewsDetail> with TickerProviderStateMixin {
   void initState() {
     _animationController = AnimationController(
         vsync: this, duration: const Duration(microseconds: 1200));
-    ;
+
     getNews();
     super.initState();
   }

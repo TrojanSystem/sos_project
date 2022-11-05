@@ -15,11 +15,17 @@ class DataProvider extends ChangeNotifier {
   String totalAppbarExpectedIncome = '';
 
   final List<Map<String, dynamic>> registeredUserFavoriteItems = [];
+  final List<Map<String, dynamic>> tenderNewsList = [];
   final List<Map<String, dynamic>> favoriteCarData = [];
   final List<Map<String, dynamic>> carData = [];
 
   checker(String userEmail) {
     houseV4Crypto = uuid.v4(options: {'rng': UuidUtil.cryptoRNG});
+    notifyListeners();
+  }
+
+  changer(String userEmail) {
+    userEmail = userEmail;
     notifyListeners();
   }
 
@@ -47,6 +53,19 @@ class DataProvider extends ChangeNotifier {
       for (var snapSell in y.docs) {
         notifyListeners();
         registeredUserFavoriteItems.add(snapSell.data());
+      }
+    }
+    notifyListeners();
+  }
+
+  void loadTenderNewsDataList() async {
+    notifyListeners();
+    await for (var y in FirebaseFirestore.instance
+        .collection('TenderNewsModel')
+        .snapshots()) {
+      for (var snapSell in y.docs) {
+        notifyListeners();
+        tenderNewsList.add(snapSell.data());
       }
     }
     notifyListeners();

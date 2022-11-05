@@ -1,13 +1,20 @@
 import 'package:ada_bread/news_screen/news_detail.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:provider/provider.dart';
 
+import '../crediential/data_provider.dart';
 import 'api_handler_for_tender.dart';
 import 'category_tender_list.dart';
 import 'tender_model.dart';
+
+final _auth = FirebaseAuth.instance;
+var loggedInUser;
 
 class TenderScreen extends StatefulWidget {
   const TenderScreen({Key key}) : super(key: key);
@@ -87,17 +94,18 @@ class _TenderScreenState extends State<TenderScreen>
   ];
   List<TenderNewsModel> todaysTenderNews = [];
   AnimationController _animationController;
+  List typeFilter = [];
   bool _isLoading = false;
   int columnCount = 2;
-  Future<void> getNews() async {
-    setState(() {
-      _isLoading = true;
-    });
-    todaysTenderNews = await ApiHandlerForTender.getAllTenderNews();
-    setState(() {
-      _isLoading = false;
-    });
-  }
+  // Future<void> getNews() async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
+  //   todaysTenderNews = await ApiHandlerForTender.getAllTenderNews();
+  //   setState(() {
+  //     _isLoading = false;
+  //   });
+  // }
 
   @override
   void dispose() {
@@ -107,29 +115,67 @@ class _TenderScreenState extends State<TenderScreen>
 
   @override
   void initState() {
+    typeFilter;
     _animationController = AnimationController(
         vsync: this, duration: const Duration(microseconds: 1200));
     todaysTenderNews;
-    getNews();
+    getCurrentUser();
     super.initState();
   }
+
+  void getCurrentUser() async {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user.uid;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  bool _isLiked = false;
+  String currentUserID = '';
+  String currentUser = '';
+  String currentUserName = '';
+  String currentProfilePic = '';
 
   @override
   Widget build(BuildContext context) {
     double _w = MediaQuery.of(context).size.width;
+    final userFavItems = Provider.of<DataProvider>(context).registeredMembers;
+
+    final userFavoriteList =
+        Provider.of<DataProvider>(context).registeredUserFavoriteItems;
+    for (var message in userFavItems) {
+      if (message['userID'] == loggedInUser) {
+        currentUserID = message['userID'];
+        currentUser = message['userEmail'];
+        currentUserName = message['userFullName'];
+        currentProfilePic = message['profilePic'];
+      }
+    }
+    print(currentUserID);
     return WillPopScope(
       onWillPop: _onWillPop,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: _isLoading
-            ? Center(
+      child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection('TenderNewsModel')
+              .snapshots(),
+          builder: (context, tender) {
+            if (!tender.hasData) {
+              return Center(
                 child: SpinKitSpinningLines(
                   color: Colors.blue[800],
                   size: 80.0,
                   lineWidth: 2,
                 ),
-              )
-            : SingleChildScrollView(
+              );
+            }
+            final typeFilter = tender.data.docs;
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: SingleChildScrollView(
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height,
                   child: Column(
@@ -137,132 +183,191 @@ class _TenderScreenState extends State<TenderScreen>
                       Expanded(
                         flex: 1,
                         child: NewHeadLines(
-                            todaysNews: todaysTenderNews,
-                            columnCount: columnCount,
-                            categoryList: category),
+                            columnCount: columnCount, categoryList: category),
                       ),
                       Expanded(
                         flex: 7,
                         child: AnimationLimiter(
                           child: ListView.builder(
-                            itemCount: todaysTenderNews.length,
-                            itemBuilder: (context, index) => GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (ctx) => NewsDetail(
-                                      blogUrl: todaysTenderNews[index].url,
+                              itemCount: typeFilter.length,
+                              itemBuilder: (context, index) {
+                                for (var message in userFavoriteList) {
+                                  if (currentUserID == loggedInUser &&
+                                      typeFilter[index]['itemID'] ==
+                                          message['itemID']) {
+                                    _isLiked = message['isFavorite'];
+                                  }
+                                }
+                                final gettyImage =
+                                    typeFilter[index]['urlToImage'];
+                                final tenderNewsImage =
+                                    gettyImage.replaceAll('"', '');
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (ctx) => NewsDetail(
+                                          blogUrl: typeFilter[index]['url'],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: AnimationConfiguration.staggeredGrid(
+                                    position: 0,
+                                    duration: const Duration(milliseconds: 500),
+                                    columnCount: 1,
+                                    child: ScaleAnimation(
+                                      duration:
+                                          const Duration(milliseconds: 900),
+                                      curve: Curves.fastLinearToSlowEaseIn,
+                                      child: FadeInAnimation(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Stack(children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(15.0),
+                                                child: ClipRRect(
+                                                  child: FancyShimmerImage(
+                                                    boxFit: BoxFit.cover,
+                                                    imageUrl: tenderNewsImage,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.25,
+                                                    errorWidget: Image.network(
+                                                        'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
+                                                    shimmerBaseColor:
+                                                        Colors.greenAccent,
+                                                    shimmerHighlightColor:
+                                                        Colors.grey,
+                                                    shimmerBackColor:
+                                                        Colors.greenAccent,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  clipBehavior: Clip.antiAlias,
+                                                ),
+                                              ),
+                                              Positioned(
+                                                right: 20,
+                                                bottom: 0,
+                                                child: IconButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      FirebaseFirestore.instance
+                                                          .collection(
+                                                              'Favorite')
+                                                          .doc(typeFilter[index]
+                                                                  ['itemID'] +
+                                                              typeFilter[index]
+                                                                  ['userID'])
+                                                          .set({
+                                                        'type': 'tender',
+                                                        'author':
+                                                            typeFilter[index]
+                                                                ['author'],
+                                                        'category': 'health',
+                                                        'itemType':
+                                                            typeFilter[index]
+                                                                ['itemType'],
+                                                        'content':
+                                                            typeFilter[index]
+                                                                ['content'],
+                                                        'description':
+                                                            typeFilter[index]
+                                                                ['description'],
+                                                        'isFavorite': !_isLiked,
+                                                        'itemID':
+                                                            typeFilter[index]
+                                                                ['itemID'],
+                                                        'publishedAt':
+                                                            typeFilter[index]
+                                                                ['publishedAt'],
+                                                        'title':
+                                                            typeFilter[index]
+                                                                ['title'],
+                                                        'url': typeFilter[index]
+                                                            ['url'],
+                                                        'urlToImage':
+                                                            typeFilter[index]
+                                                                ['urlToImage'],
+                                                        'userID': currentUserID,
+                                                      });
+                                                    });
+                                                  },
+                                                  icon: Icon(
+                                                    _isLiked
+                                                        ? Icons.bookmark
+                                                        : Icons.bookmark_add,
+                                                    color: _isLiked
+                                                        ? Colors.red
+                                                        : Colors.green,
+                                                    size: 45,
+                                                  ),
+                                                ),
+                                              )
+                                            ]),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(12.0),
+                                              child: Text(
+                                                typeFilter[index]['title'] ??
+                                                    ' ',
+                                                textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w900,
+                                                  fontSize: 18,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: Text(
+                                                typeFilter[index]
+                                                        ['description'] ??
+                                                    ' ',
+                                                textAlign: TextAlign.start,
+                                                style: const TextStyle(
+                                                  fontWeight: FontWeight.normal,
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 );
-                              },
-                              child: AnimationConfiguration.staggeredGrid(
-                                position: 0,
-                                duration: const Duration(milliseconds: 500),
-                                columnCount: 1,
-                                child: ScaleAnimation(
-                                  duration: const Duration(milliseconds: 900),
-                                  curve: Curves.fastLinearToSlowEaseIn,
-                                  child: FadeInAnimation(
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Stack(children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(15.0),
-                                            child: ClipRRect(
-                                              child: FancyShimmerImage(
-                                                boxFit: BoxFit.cover,
-                                                imageUrl:
-                                                    todaysTenderNews[index]
-                                                        .urlToImage,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.25,
-                                                errorWidget: Image.network(
-                                                    'https://i0.wp.com/www.dobitaobyte.com.br/wp-content/uploads/2016/02/no_image.png?ssl=1'),
-                                                shimmerBaseColor:
-                                                    Colors.greenAccent,
-                                                shimmerHighlightColor:
-                                                    Colors.grey,
-                                                shimmerBackColor:
-                                                    Colors.greenAccent,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              clipBehavior: Clip.antiAlias,
-                                            ),
-                                          ),
-                                          Positioned(
-                                            right: 20,
-                                            bottom: 0,
-                                            child: IconButton(
-                                              onPressed: () {},
-                                              icon: const Icon(
-                                                Icons.bookmark_add,
-                                                color: Colors.green,
-                                                size: 45,
-                                              ),
-                                            ),
-                                          )
-                                        ]),
-                                        Padding(
-                                          padding: const EdgeInsets.all(12.0),
-                                          child: Text(
-                                            todaysTenderNews[index].title ??
-                                                ' ',
-                                            textAlign: TextAlign.center,
-                                            style: const TextStyle(
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 18,
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: Text(
-                                            todaysTenderNews[index]
-                                                    .description ??
-                                                ' ',
-                                            textAlign: TextAlign.start,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.normal,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                              }),
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-      ),
+            );
+          }),
     );
   }
 }
 
 class NewHeadLines extends StatelessWidget {
-  const NewHeadLines({
+  NewHeadLines({
     Key key,
     @required this.categoryList,
-    @required this.todaysNews,
     @required this.columnCount,
   }) : super(key: key);
 
-  final List<TenderNewsModel> todaysNews;
   final int columnCount;
   final List categoryList;
   @override

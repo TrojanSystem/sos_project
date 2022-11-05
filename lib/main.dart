@@ -34,6 +34,7 @@ class SOSProject extends StatelessWidget {
           create: (ctx) => DataProvider()
             ..loadCarDetailDataList()
             ..loadFavoriteCarDataList()
+            ..loadTenderNewsDataList()
             ..loadCarDataList()
             ..loadHomeDetailDataList(),
         ),

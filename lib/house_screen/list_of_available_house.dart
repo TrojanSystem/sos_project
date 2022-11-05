@@ -94,7 +94,7 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
               currentProfilePic = message['profilePic'];
             }
           }
-
+          print(loggedInUser);
           final houseType = snapData.data.docs;
           final typeFilter = houseType
               .where((element) => element['type'] == widget.type)
@@ -262,12 +262,9 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                                           type:
                                                               typeFilter[index]
                                                                   ['type'],
-                                                          price: numberFormat
-                                                              .format(
-                                                                  typeFilter[
-                                                                          index]
-                                                                      ['price'])
-                                                              .toString(),
+                                                          price:
+                                                              typeFilter[index]
+                                                                  ['price'],
                                                           location:
                                                               typeFilter[index]
                                                                   ['location'],
