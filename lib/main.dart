@@ -39,9 +39,12 @@ class SOSProject extends StatelessWidget {
             ..loadHomeDetailDataList(),
         ),
       ],
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: FrontScreen(),
+        themeMode: ThemeMode.system,
+        theme: ThemeData.light(),
+        darkTheme: ThemeData.dark(),
+        home: const FrontScreen(),
       ),
     );
   }

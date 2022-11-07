@@ -119,6 +119,8 @@ class _HouseDetailState extends State<HouseDetail> {
                 detailSnapData[widget.houseIndex]['itemID'] ==
                     message['itemID']) {
               _isLiked = message['isFavorite'];
+            } else if (message.isEmpty) {
+              _isLiked = detailSnapData[widget.houseIndex]['isFavorite'];
             }
           }
           return Stack(
@@ -543,7 +545,7 @@ class _HouseDetailState extends State<HouseDetail> {
                       FirebaseFirestore.instance
                           .collection('Favorite')
                           .doc(detailSnapData[widget.houseIndex]['itemID'] +
-                              detailSnapData[widget.houseIndex]['userID'])
+                              currentUserID)
                           .set({
                         'userID': currentUserID,
                         'image': widget.image,

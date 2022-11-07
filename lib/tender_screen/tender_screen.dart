@@ -155,7 +155,7 @@ class _TenderScreenState extends State<TenderScreen>
         currentProfilePic = message['profilePic'];
       }
     }
-    print(currentUserID);
+
     return WillPopScope(
       onWillPop: _onWillPop,
       child: StreamBuilder<QuerySnapshot>(
@@ -192,10 +192,12 @@ class _TenderScreenState extends State<TenderScreen>
                               itemCount: typeFilter.length,
                               itemBuilder: (context, index) {
                                 for (var message in userFavoriteList) {
-                                  if (currentUserID == loggedInUser &&
+                                  if (message['userID'] == loggedInUser &&
                                       typeFilter[index]['itemID'] ==
                                           message['itemID']) {
                                     _isLiked = message['isFavorite'];
+                                  } else if (message.isEmpty) {
+                                    _isLiked = typeFilter[index]['isFavorite'];
                                   }
                                 }
                                 final gettyImage =
@@ -266,8 +268,7 @@ class _TenderScreenState extends State<TenderScreen>
                                                               'Favorite')
                                                           .doc(typeFilter[index]
                                                                   ['itemID'] +
-                                                              typeFilter[index]
-                                                                  ['userID'])
+                                                              currentUserID)
                                                           .set({
                                                         'type': 'tender',
                                                         'author':

@@ -163,11 +163,15 @@ class _CarHomeScreenState extends State<CarHomeScreen> {
                                       padding: EdgeInsets.all(_w / 60),
                                       itemBuilder: (context, index) {
                                         for (var message in userFavoriteList) {
-                                          if (currentUserID == loggedInUser &&
+                                          if (message['userID'] ==
+                                                  loggedInUser &&
                                               carData[index]['itemID'] ==
                                                   message['itemID']) {
                                             _isFavoriteItem =
                                                 message['isFavorite'];
+                                          } else if (message.isEmpty) {
+                                            _isFavoriteItem =
+                                                carData[index]['isFavorite'];
                                           }
                                         }
 
@@ -389,7 +393,7 @@ class _CarHomeScreenState extends State<CarHomeScreen> {
                                                                           .collection(
                                                                               'Favorite')
                                                                           .doc(carData[index]['itemID'] +
-                                                                              carData[index]['userID'])
+                                                                              currentUserID)
                                                                           .set({
                                                                         'userID':
                                                                             currentUserID,

@@ -89,10 +89,12 @@ class _ListOfAvailableCarsState extends State<ListOfAvailableCars> {
                           padding: EdgeInsets.all(_w / 60),
                           itemBuilder: (context, index) {
                             for (var message in userFavoriteList) {
-                              if (currentUserID == loggedInUser &&
+                              if (message['userID'] == loggedInUser &&
                                   widget.carType[index]['itemID'] ==
                                       message['itemID']) {
                                 _isLiked = message['isFavorite'];
+                              } else if (message.isEmpty) {
+                                _isLiked = widget.carType[index]['isFavorite'];
                               }
                             }
                             return AnimationConfiguration.staggeredGrid(
@@ -313,10 +315,7 @@ class _ListOfAvailableCarsState extends State<ListOfAvailableCars> {
                                                                             index]
                                                                         [
                                                                         'itemID'] +
-                                                                    widget.carType[
-                                                                            index]
-                                                                        [
-                                                                        'userID'])
+                                                                    currentUserID)
                                                                 .set({
                                                               'userID':
                                                                   currentUserID,

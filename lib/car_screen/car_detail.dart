@@ -133,10 +133,12 @@ class _CarDetailState extends State<CarDetail> {
               }
               final carListDetail = carModel.data.docs;
               for (var message in userFavoriteList) {
-                if (currentUserID == loggedInUser &&
+                if (message['userID'] == loggedInUser &&
                     carListDetail[widget.index]['itemID'] ==
                         message['itemID']) {
                   _isLiked = message['isFavorite'];
+                } else if (message.isEmpty) {
+                  _isLiked = carListDetail[widget.index]['isFavorite'];
                 }
               }
 
@@ -530,7 +532,7 @@ class _CarDetailState extends State<CarDetail> {
                             FirebaseFirestore.instance
                                 .collection('Favorite')
                                 .doc(carListDetail[widget.index]['itemID'] +
-                                    carListDetail[widget.index]['userID'])
+                                    currentUserID)
                                 .set({
                               'userID': currentUserID,
                               'type': carListDetail[widget.index]['type'],

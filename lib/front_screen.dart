@@ -25,8 +25,7 @@ class _FrontScreenState extends State<FrontScreen> {
             ),
             actions: <Widget>[
               TextButton(
-                onPressed: () =>
-                    Navigator.of(context).pop(false), //<-- SEE HERE
+                onPressed: () => Navigator.pop(context), //<-- SEE HERE
                 child: const Text('No'),
               ),
               TextButton(
@@ -70,6 +69,7 @@ class _FrontScreenState extends State<FrontScreen> {
               flex: 3,
               child: Column(
                 children: [
+
                   const Text(
                     'Discover dream house',
                     style: TextStyle(

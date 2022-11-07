@@ -94,7 +94,7 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
               currentProfilePic = message['profilePic'];
             }
           }
-          print(loggedInUser);
+
           final houseType = snapData.data.docs;
           final typeFilter = houseType
               .where((element) => element['type'] == widget.type)
@@ -121,10 +121,12 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                       padding: EdgeInsets.all(_w / 60),
                       itemBuilder: (context, index) {
                         for (var message in userFavoriteList) {
-                          if (currentUserID == loggedInUser &&
+                          if (message['userID'] == loggedInUser &&
                               typeFilter[index]['itemID'] ==
                                   message['itemID']) {
                             _isLiked = message['isFavorite'];
+                          } else if (message.isEmpty) {
+                            _isLiked = typeFilter[index]['isFavorite'];
                           }
                         }
 
@@ -304,8 +306,7 @@ class _ListOfAvailableHouseState extends State<ListOfAvailableHouse> {
                                                               'Favorite')
                                                           .doc(typeFilter[index]
                                                                   ['itemID'] +
-                                                              typeFilter[index]
-                                                                  ['userID'])
+                                                              currentUserID)
                                                           .set({
                                                         'userID': currentUserID,
                                                         'itemID':
